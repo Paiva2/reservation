@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "TB_ROOM_SEAT")
+@Table(name = "TB_ROOMS_SEATS")
 public class RoomSeatEntity {
     @EmbeddedId
     private KeyId id;

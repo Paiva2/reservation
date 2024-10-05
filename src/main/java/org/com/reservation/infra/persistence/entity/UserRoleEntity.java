@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "TB_USER_ROLE")
+@Table(name = "TB_USERS_ROLES")
 public class UserRoleEntity {
     @EmbeddedId
     private KeyId id;

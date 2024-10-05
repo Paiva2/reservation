@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
+>
+    <include
+            labels="0-create-initial-db-configs"
+            author="paiva2"
+            created="2024-10-05"
+            file="classpath:db/changelog/1.0.0/0-create-initial-db-configs.sql"
+    />
+
+    <include
+            labels="1-create-initial-tables"
+            author="paiva2"
+            created="2024-10-05"
+            file="classpath:db/changelog/1.0.0/1-create-initial-tables.sql"
+    />
+
+    <include
+            labels="2-create-updated-at-triggers-initial-tables"
+            author="paiva2"
+            created="2024-10-05"
+            file="classpath:db/changelog/1.0.0/2-create-updated-at-triggers-initial-tables.sql"
+    />
+</databaseChangeLog>

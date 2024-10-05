@@ -13,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "TB_ROOM_SESSION")
+@Table(name = "TB_ROOMS_SESSIONS")
 public class RoomSessionEntity {
     @EmbeddedId
     private KeyId id;

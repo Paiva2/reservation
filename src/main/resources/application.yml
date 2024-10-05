@@ -7,6 +7,8 @@ server:
 spring:
   application:
     name: reservation-app
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
   datasource:
     url: jdbc:postgresql://localhost:5432/reservation-app
     username: postgres
