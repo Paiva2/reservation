@@ -12,13 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class Reservation {
+public class Session {
     private Long id;
+    private Date start;
+    private Date end;
     private Date createdAt;
     private Date updatedAt;
 
-    private User user;
-    private Session session;
-    private List<ReservationMovieTicket> reservationMovieTickets;
-    private List<ReservationRoomSeat> reservationRoomSeats;
+    private Movie movie;
+    private List<RoomSession> roomSessions;
+    private List<Reservation> reservations;
 }

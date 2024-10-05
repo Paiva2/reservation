@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.com.reservation.domain.enumeration.EnumRole;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +18,5 @@ public class Role {
     private EnumRole name;
     private Date createdAt;
     private Date updatedAt;
+    private List<UserRole> userRoles;
 }

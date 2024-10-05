@@ -14,9 +14,9 @@ import java.util.List;
 @Builder
 public class Room {
     private Long id;
-    private Integer number;
-    private List<RoomSeat> seats;
-    private List<MovieRoom> movieRooms;
+    private String number;
     private Date createdAt;
     private Date updatedAt;
+    private List<RoomSeat> seats;
+    private List<RoomSession> roomSessions;
 }

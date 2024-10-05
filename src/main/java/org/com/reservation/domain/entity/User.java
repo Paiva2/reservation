@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @Builder
 public class User {
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -21,6 +22,7 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
     private Date disabledAt;
+
     private List<Reservation> reservations;
-    private List<UserRole> roles;
+    private List<UserRole> userRoles;
 }

@@ -1,9 +1,6 @@
 package org.com.reservation.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,21 +8,21 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
-public class MovieRoom {
+public class RoomSession {
     private KeyId id;
-    private Date start;
-    private Date end;
     private Date createdAt;
     private Date updatedAt;
+
     private Room room;
-    private Movie movie;
+    private Session session;
 
     @AllArgsConstructor
     @NoArgsConstructor
-    @Data
     @Builder
+    @Getter
+    @Setter
     public static class KeyId {
-        private Long movieId;
+        private Long sessionId;
         private Long roomId;
     }
 }

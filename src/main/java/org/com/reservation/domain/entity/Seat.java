@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.com.reservation.domain.enumeration.EnumSeatRow;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +20,5 @@ public class Seat {
     private Boolean accessibility;
     private Date createdAt;
     private Date updatedAt;
+    private List<RoomSeat> roomSeats;
 }

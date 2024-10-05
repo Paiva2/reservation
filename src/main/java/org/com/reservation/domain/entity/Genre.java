@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,4 +17,5 @@ public class Genre {
     private String name;
     private Date createdAt;
     private Date updatedAt;
+    private List<MovieGenre> movieGenres;
 }
