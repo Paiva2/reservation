@@ -3,9 +3,12 @@ package org.com.reservation.infra.persistence.mapper;
 import org.com.reservation.domain.entity.Reservation;
 import org.com.reservation.domain.entity.User;
 import org.com.reservation.domain.entity.UserRole;
+import org.com.reservation.infra.persistence.entity.ReservationEntity;
 import org.com.reservation.infra.persistence.entity.UserEntity;
 import org.com.reservation.infra.persistence.entity.UserRoleEntity;
+import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,85 +16,76 @@ public class UserMapper {
     public static Optional<User> toUserOptional(Optional<UserEntity> userEntity) {
         if (userEntity.isEmpty()) return Optional.empty();
 
-        List<UserRole> userRoles;
-        List<Reservation> reservations;
-
-        if (userEntity.get().getUserRoles().isEmpty()) {
-            userRoles = null;
-        } else {
-            userRoles = userEntity.get().getUserRoles().stream().map(UserRoleMapper::toUserRole).toList();
-        }
-
-        if (userEntity.get().getReservations().isEmpty()) {
-            reservations = null;
-        } else {
-            reservations = userEntity.get().getReservations().stream().map(ReservationMapper::toReservation).toList();
-        }
-
-        return Optional.of(User.builder()
-            .firstName(userEntity.get().getFirstName())
-            .lastName(userEntity.get().getLastName())
-            .profilePicture(userEntity.get().getProfilePicture())
-            .email(userEntity.get().getEmail())
-            .password(userEntity.get().getPassword())
-            .userRoles(userRoles)
-            .createdAt(userEntity.get().getCreatedAt())
-            .updatedAt(userEntity.get().getUpdatedAt())
-            .disabledAt(userEntity.get().getDisabledAt())
-            .reservations(reservations)
-            .build()
-        );
+        return Optional.of(convertEntityToDomain(userEntity.get()));
     }
 
     public static User toUser(UserEntity userEntity) {
-        List<UserRole> userRoles;
-        List<Reservation> reservations;
-
-        if (userEntity.getUserRoles().isEmpty()) {
-            userRoles = null;
-        } else {
-            userRoles = userEntity.getUserRoles().stream().map(UserRoleMapper::toUserRole).toList();
-        }
-
-        if (userEntity.getReservations().isEmpty()) {
-            reservations = null;
-        } else {
-            reservations = userEntity.getReservations().stream().map(ReservationMapper::toReservation).toList();
-        }
-
-        return User.builder()
-            .firstName(userEntity.getFirstName())
-            .lastName(userEntity.getLastName())
-            .profilePicture(userEntity.getProfilePicture())
-            .email(userEntity.getEmail())
-            .password(userEntity.getPassword())
-            .userRoles(userRoles)
-            .createdAt(userEntity.getCreatedAt())
-            .updatedAt(userEntity.getUpdatedAt())
-            .disabledAt(userEntity.getDisabledAt())
-            .reservations(reservations)
-            .build();
+        return convertEntityToDomain(userEntity);
     }
 
     public static UserEntity toUserEntity(User user) {
-        List<UserRoleEntity> userRoles;
+        UserEntity userEntity = new UserEntity();
+        copyProperties(user, userEntity);
 
-        if (user.getUserRoles().isEmpty()) {
-            userRoles = null;
-        } else {
-            userRoles = user.getUserRoles().stream().map(UserRoleMapper::toUserRoleEntity).toList();
+        if (user.getUserRoles() != null) {
+            List<UserRole> userRoles = user.getUserRoles();
+            List<UserRoleEntity> userRolesEntity = new ArrayList<>();
+
+            for (UserRole userRoleDomain : userRoles) {
+                UserRoleEntity userRoleEntity = UserRoleMapper.toUserRoleEntity(userRoleDomain);
+                userRolesEntity.add(userRoleEntity);
+            }
+
+            userEntity.setUserRoles(userRolesEntity);
         }
 
-        return UserEntity.builder()
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
-            .profilePicture(user.getProfilePicture())
-            .email(user.getEmail())
-            .password(user.getPassword())
-            .userRoles(userRoles)
-            .createdAt(user.getCreatedAt())
-            .updatedAt(user.getUpdatedAt())
-            .disabledAt(user.getDisabledAt())
-            .build();
+        if (user.getReservations() != null) {
+            List<Reservation> reservations = user.getReservations();
+            List<ReservationEntity> reservationsEntity = new ArrayList<>();
+
+            for (Reservation reservationDomain : reservations) {
+                ReservationEntity reservationEntity = ReservationMapper.toReservationEntity(reservationDomain);
+                reservationsEntity.add(reservationEntity);
+            }
+
+            userEntity.setReservations(reservationsEntity);
+        }
+
+        return userEntity;
+    }
+
+    private static User convertEntityToDomain(UserEntity userEntity) {
+        User user = new User();
+        copyProperties(userEntity, user);
+
+        if (userEntity.getUserRoles() != null) {
+            List<UserRoleEntity> userRolesEntity = userEntity.getUserRoles();
+            List<UserRole> userRoles = new ArrayList<>();
+
+            for (UserRoleEntity entity : userRolesEntity) {
+                UserRole userRole = UserRoleMapper.toUserRole(entity);
+                userRoles.add(userRole);
+            }
+
+            user.setUserRoles(userRoles);
+        }
+
+        if (userEntity.getReservations() != null) {
+            List<ReservationEntity> reservationsEntity = userEntity.getReservations();
+            List<Reservation> reservations = new ArrayList<>();
+
+            for (ReservationEntity entity : reservationsEntity) {
+                Reservation reservation = ReservationMapper.toReservation(entity);
+                reservations.add(reservation);
+            }
+
+            user.setReservations(reservations);
+        }
+
+        return user;
+    }
+
+    private static void copyProperties(Object source, Object target) {
+        BeanUtils.copyProperties(source, target);
     }
 }

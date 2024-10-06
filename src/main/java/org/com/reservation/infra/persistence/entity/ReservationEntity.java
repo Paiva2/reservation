@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "TB_RESERVATIONS")
 public class ReservationEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RES_ID")
     private Long id;
 

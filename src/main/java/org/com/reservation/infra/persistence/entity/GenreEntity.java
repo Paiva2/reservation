@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "TB_GENRES")
 public class GenreEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "GR_ID")
     private Long id;
 

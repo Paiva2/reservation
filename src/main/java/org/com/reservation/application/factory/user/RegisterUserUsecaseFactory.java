@@ -6,7 +6,7 @@ import org.com.reservation.domain.dataprovider.UserDataProvider;
 import org.com.reservation.domain.dataprovider.UserRoleDataProvider;
 import org.com.reservation.domain.interfaces.EmailUtils;
 import org.com.reservation.domain.interfaces.PasswordUtils;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.RegisterUserUsecase;
+import org.com.reservation.domain.usecase.user.registerUser.RegisterUserUsecase;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

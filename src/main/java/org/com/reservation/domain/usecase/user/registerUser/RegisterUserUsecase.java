@@ -1,4 +1,4 @@
-package org.com.reservation.domain.usecase.user.registerUserUsecase;
+package org.com.reservation.domain.usecase.user.registerUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,15 +9,14 @@ import org.com.reservation.domain.entity.Role;
 import org.com.reservation.domain.entity.User;
 import org.com.reservation.domain.entity.UserRole;
 import org.com.reservation.domain.enumeration.EnumRole;
-import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.exception.EmailAlreadyUsedException;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.exception.InvalidPasswordException;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.exception.RoleNotFoundException;
 import org.com.reservation.domain.interfaces.EmailUtils;
 import org.com.reservation.domain.interfaces.PasswordUtils;
+import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
+import org.com.reservation.domain.usecase.user.registerUser.exception.EmailAlreadyUsedException;
+import org.com.reservation.domain.usecase.user.registerUser.exception.InvalidPasswordException;
+import org.com.reservation.domain.usecase.user.registerUser.exception.RoleNotFoundException;
 
 import java.util.Optional;
-
 
 @Builder
 @AllArgsConstructor
@@ -78,8 +77,12 @@ public class RegisterUserUsecase {
         }
 
         UserRole userRole = new UserRole();
-        userRole.setRole(role.get());
+        UserRole.KeyId keyId = new UserRole.KeyId();
+        keyId.setUserId(userPersisted.getId());
+        keyId.setRoleId(role.get().getId());
+        userRole.setId(keyId);
         userRole.setUser(userPersisted);
+        userRole.setRole(role.get());
 
         persistUserRole(userRole);
     }

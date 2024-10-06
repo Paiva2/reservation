@@ -24,4 +24,11 @@
             created="2024-10-05"
             file="classpath:db/changelog/1.0.0/2-create-updated-at-triggers-initial-tables.sql"
     />
+
+    <include
+            labels="3-create-initial-data-roles-genres"
+            author="paiva2"
+            created="2024-10-06"
+            file="classpath:db/changelog/1.0.0/3-create-initial-data-roles-genres.sql"
+    />
 </databaseChangeLog>

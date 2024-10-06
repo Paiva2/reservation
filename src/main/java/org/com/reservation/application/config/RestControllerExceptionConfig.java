@@ -1,42 +1,40 @@
 package org.com.reservation.application.config;
 
 import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.exception.EmailAlreadyUsedException;
-import org.com.reservation.domain.usecase.user.registerUserUsecase.exception.InvalidPasswordException;
+import org.com.reservation.domain.usecase.user.registerUser.exception.EmailAlreadyUsedException;
+import org.com.reservation.domain.usecase.user.registerUser.exception.InvalidPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.HashMap;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ControllerAdvice
 public class RestControllerExceptionConfig {
     @ExceptionHandler(InvalidEmailException.class)
     public ResponseEntity<Map<String, String>> handleInvalidEmailException(InvalidEmailException ex) {
-        Map<String, String> errorMapper = new HashMap<>() {{
-            put("status", String.valueOf(HttpStatus.BAD_REQUEST.value()));
-            put("message", ex.getMessage());
-        }};
-        return new ResponseEntity<>(errorMapper, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidPasswordException.class)
     public ResponseEntity<Map<String, String>> handleInvalidPasswordException(InvalidPasswordException ex) {
-        Map<String, String> errorMapper = new HashMap<>() {{
-            put("status", String.valueOf(HttpStatus.CONFLICT.value()));
-            put("message", ex.getMessage());
-        }};
-        return new ResponseEntity<>(errorMapper, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(EmailAlreadyUsedException.class)
     public ResponseEntity<Map<String, String>> handleEmailAlreadyUsedException(EmailAlreadyUsedException ex) {
-        Map<String, String> errorMapper = new HashMap<>() {{
-            put("status", String.valueOf(HttpStatus.CONFLICT.value()));
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT);
+    }
+
+    private Map<String, String> mapErrors(Exception ex, int statusValue) {
+        return new LinkedHashMap<>() {{
+            put("date", new Date().toString());
+            put("status", String.valueOf(statusValue));
             put("message", ex.getMessage());
+            put("exception", ex.getClass().getSimpleName());
         }};
-        return new ResponseEntity<>(errorMapper, HttpStatus.CONFLICT);
     }
 }

@@ -15,10 +15,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TB_USERS")
+@SequenceGenerator(name = "user_local_seq", sequenceName = "tb_users_us_id_seq", allocationSize = 1)
 public class UserEntity {
     @Id
     @Column(name = "US_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_local_seq")
     private Long id;
 
     @Column(name = "US_FIRST_NAME", nullable = false)

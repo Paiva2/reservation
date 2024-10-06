@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "TB_ROLES")
 public class RoleEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RL_ID")
     private Long id;
 

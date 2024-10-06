@@ -18,7 +18,7 @@ import java.util.List;
 @Entity(name = "TB_SEATS")
 public class SeatEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ST_ID")
     private Long id;
 
