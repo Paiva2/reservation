@@ -1,7 +1,7 @@
 package org.com.reservation.infra.utils;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.domain.interfaces.EmailUtils;
+import org.com.reservation.domain.interfaces.utils.EmailUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;

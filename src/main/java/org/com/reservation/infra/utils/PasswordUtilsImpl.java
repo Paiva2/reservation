@@ -1,7 +1,7 @@
 package org.com.reservation.infra.utils;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.domain.interfaces.PasswordUtils;
+import org.com.reservation.domain.interfaces.utils.PasswordUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

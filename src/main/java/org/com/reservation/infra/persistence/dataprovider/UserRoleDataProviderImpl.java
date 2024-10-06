@@ -1,7 +1,7 @@
 package org.com.reservation.infra.persistence.dataprovider;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.domain.dataprovider.UserRoleDataProvider;
+import org.com.reservation.domain.interfaces.dataprovider.UserRoleDataProvider;
 import org.com.reservation.domain.entity.UserRole;
 import org.com.reservation.infra.persistence.entity.UserRoleEntity;
 import org.com.reservation.infra.persistence.mapper.UserRoleMapper;

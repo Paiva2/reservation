@@ -1,7 +1,7 @@
 package org.com.reservation.infra.persistence.dataprovider;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.domain.dataprovider.UserDataProvider;
+import org.com.reservation.domain.interfaces.dataprovider.UserDataProvider;
 import org.com.reservation.domain.entity.User;
 import org.com.reservation.infra.persistence.entity.UserEntity;
 import org.com.reservation.infra.persistence.mapper.UserMapper;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 public class UserDataProviderImpl implements UserDataProvider {
     private final UserRepository userRepository;
-    
+
     @Override
     public Optional<User> findByUserId(Long id) {
         Optional<User> user = UserMapper.toUserOptional(userRepository.findById(id));

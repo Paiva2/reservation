@@ -9,28 +9,17 @@ import org.com.reservation.domain.entity.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RegisterUserInput {
+public class UserLoginInput {
     @NotBlank
-    private String firstName;
-
-    @NotBlank
-    private String lastName;
+    private String email;
 
     @NotBlank
     private String password;
 
-    @NotBlank
-    private String email;
-
-    private String profilePicture;
-
-    public static User toUser(RegisterUserInput input) {
+    public static User toUser(UserLoginInput input) {
         return User.builder()
-            .firstName(input.getFirstName())
-            .lastName(input.getLastName())
-            .password(input.getPassword())
             .email(input.getEmail())
-            .profilePicture(input.getProfilePicture())
+            .password(input.getPassword())
             .build();
     }
 }
