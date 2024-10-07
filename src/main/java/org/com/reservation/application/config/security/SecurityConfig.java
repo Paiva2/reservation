@@ -1,5 +1,6 @@
 package org.com.reservation.application.config.security;
 
+import jakarta.servlet.DispatcherType;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeHttpRequests(req -> {
+            req.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll();
             req.requestMatchers("/api/v1/user/register").permitAll();
             req.requestMatchers("/api/v1/user/login").permitAll();
             req.anyRequest().authenticated();
@@ -34,7 +36,7 @@ public class SecurityConfig {
             .cors(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
             .formLogin(AbstractHttpConfigurer::disable);
-        
+
         http.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

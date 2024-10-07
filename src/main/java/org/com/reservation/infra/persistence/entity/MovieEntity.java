@@ -15,10 +15,11 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TB_MOVIES")
+@SequenceGenerator(name = "movie_local_seq", sequenceName = "tb_movies_mo_id_seq", allocationSize = 1)
 public class MovieEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MO_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_local_seq")
     private Long id;
 
     @Column(name = "MO_TITLE", unique = true, nullable = false)

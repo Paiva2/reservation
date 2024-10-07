@@ -1,18 +1,18 @@
 package org.com.reservation.infra.persistence.dataprovider;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.domain.interfaces.dataprovider.RoleDataProvider;
 import org.com.reservation.domain.entity.Role;
 import org.com.reservation.domain.enumeration.EnumRole;
+import org.com.reservation.domain.interfaces.dataprovider.RoleDataProvider;
+import org.com.reservation.infra.annotations.DataProvider;
 import org.com.reservation.infra.persistence.entity.RoleEntity;
 import org.com.reservation.infra.persistence.mapper.RoleMapper;
 import org.com.reservation.infra.persistence.repository.RoleRepository;
-import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @AllArgsConstructor
-@Component
+@DataProvider
 public class RoleDataProviderImpl implements RoleDataProvider {
     private final RoleRepository roleRepository;
 

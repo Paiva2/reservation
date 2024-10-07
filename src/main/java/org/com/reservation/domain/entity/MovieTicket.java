@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.com.reservation.infra.persistence.entity.MovieEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +22,6 @@ public class MovieTicket {
     private Date createdAt;
     private Date updatedAt;
 
-    private MovieEntity movie;
+    private Movie movie;
     private List<ReservationMovieTicket> reservationMovieTickets;
 }

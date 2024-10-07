@@ -53,12 +53,12 @@ public class UserMapper {
 
         return userEntity;
     }
-
+    
     private static User convertEntityToDomain(UserEntity userEntity) {
         User user = new User();
         copyProperties(userEntity, user);
 
-        if (userEntity.getUserRoles() != null) {
+        if (userEntity.getUserRoles() != null && !userEntity.getUserRoles().isEmpty()) {
             List<UserRoleEntity> userRolesEntity = userEntity.getUserRoles();
             List<UserRole> userRoles = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class UserMapper {
             user.setUserRoles(userRoles);
         }
 
-        if (userEntity.getReservations() != null) {
+        if (userEntity.getReservations() != null && !userEntity.getReservations().isEmpty()) {
             List<ReservationEntity> reservationsEntity = userEntity.getReservations();
             List<Reservation> reservations = new ArrayList<>();
 

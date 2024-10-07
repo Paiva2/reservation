@@ -22,8 +22,10 @@ public class Movie {
     private Date releaseDate;
     private String studioName;
     private String cast;
-    private List<MovieGenre> movieGenres;
-    private List<Reservation> reservations;
     private Date createdAt;
     private Date updatedAt;
+
+    private List<MovieGenre> movieGenres;
+    private List<Reservation> reservations;
+    private List<Session> sessions;
 }
