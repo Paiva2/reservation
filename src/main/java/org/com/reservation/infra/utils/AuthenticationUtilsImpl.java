@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.Date;
 
 @Component
@@ -66,6 +67,14 @@ public class AuthenticationUtilsImpl implements AuthenticationUtils {
         return signedJWT.serialize();
     }
 
+    @Override
+    public SignedJWT verify(String token) throws ParseException, JOSEException {
+        SignedJWT signedJWT = SignedJWT.parse(token);
+        signedJWT.verify(verifier);
+
+        return signedJWT;
+    }
+    
     private RSAKey getKeyFromPemFile(String path) throws IOException, JOSEException {
         String keyPEM = new String(Files.readAllBytes(Paths.get(path)));
         RSAKey rsaKey = RSAKey.parseFromPEMEncodedObjects(keyPEM).toRSAKey();

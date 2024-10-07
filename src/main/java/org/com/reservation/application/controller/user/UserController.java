@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public interface UserController {
     @PostMapping("/register")
     ResponseEntity<Void> register(@RequestBody @Valid RegisterUserInput input);

@@ -21,7 +21,7 @@ public class UserControllerImpl implements UserController {
     @Transactional
     public ResponseEntity<Void> register(RegisterUserInput input) {
         registerUserUsecase.execute(RegisterUserInput.toUser(input));
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
