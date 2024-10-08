@@ -1,4 +1,4 @@
-package org.com.reservation.application.controller.output;
+package org.com.reservation.application.controller.dto.output.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

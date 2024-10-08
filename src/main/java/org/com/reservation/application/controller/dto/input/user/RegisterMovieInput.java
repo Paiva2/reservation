@@ -1,4 +1,4 @@
-package org.com.reservation.application.controller.input.user;
+package org.com.reservation.application.controller.dto.input.user;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

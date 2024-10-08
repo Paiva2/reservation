@@ -1,9 +1,9 @@
 package org.com.reservation.application.controller.user;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.application.controller.input.user.RegisterUserInput;
-import org.com.reservation.application.controller.input.user.UserLoginInput;
-import org.com.reservation.application.controller.output.UserLoginOutput;
+import org.com.reservation.application.controller.dto.input.user.RegisterUserInput;
+import org.com.reservation.application.controller.dto.input.user.UserLoginInput;
+import org.com.reservation.application.controller.dto.output.user.UserLoginOutput;
 import org.com.reservation.domain.usecase.user.registerUser.RegisterUserUsecase;
 import org.com.reservation.domain.usecase.user.userAuthentication.UserAuthenticationUsecase;
 import org.springframework.http.HttpStatus;

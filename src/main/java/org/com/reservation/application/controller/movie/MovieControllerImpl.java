@@ -1,7 +1,7 @@
 package org.com.reservation.application.controller.movie;
 
 import lombok.AllArgsConstructor;
-import org.com.reservation.application.controller.input.user.RegisterMovieInput;
+import org.com.reservation.application.controller.dto.input.user.RegisterMovieInput;
 import org.com.reservation.domain.usecase.movie.registerMovie.RegisterMovieUsecase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

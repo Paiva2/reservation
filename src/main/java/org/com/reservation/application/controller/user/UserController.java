@@ -1,9 +1,9 @@
 package org.com.reservation.application.controller.user;
 
 import jakarta.validation.Valid;
-import org.com.reservation.application.controller.input.user.RegisterUserInput;
-import org.com.reservation.application.controller.input.user.UserLoginInput;
-import org.com.reservation.application.controller.output.UserLoginOutput;
+import org.com.reservation.application.controller.dto.input.user.RegisterUserInput;
+import org.com.reservation.application.controller.dto.input.user.UserLoginInput;
+import org.com.reservation.application.controller.dto.output.user.UserLoginOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
