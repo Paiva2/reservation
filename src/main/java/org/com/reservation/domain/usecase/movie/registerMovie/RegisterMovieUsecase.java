@@ -88,6 +88,10 @@ public class RegisterMovieUsecase {
     }
 
     private Movie fillMovieInformations(RegisterMovieInput newMovie) {
+        if (newMovie.getReleaseDate() != null) {
+            setReleaseDateToMinimum(newMovie);
+        }
+
         return Movie.builder()
             .title(newMovie.getTitle())
             .description(newMovie.getDescription())
@@ -96,8 +100,15 @@ public class RegisterMovieUsecase {
             .durationSeconds(newMovie.getDurationSeconds())
             .releaseDate(newMovie.getReleaseDate())
             .studioName(newMovie.getStudioName())
-            .cast(newMovie.getCast())
+            .cast(String.join(";", newMovie.getCast()))
             .build();
+    }
+
+    private void setReleaseDateToMinimum(RegisterMovieInput newMovie) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(newMovie.getReleaseDate());
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMinimum(Calendar.HOUR_OF_DAY));
+        newMovie.setReleaseDate(calendar.getTime());
     }
 
     private Movie persistMovie(Movie movie) {

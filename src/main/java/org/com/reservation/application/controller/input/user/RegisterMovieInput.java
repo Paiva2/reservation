@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,16 +40,14 @@ public class RegisterMovieInput {
 
     @NotNull
     @Min(value = 0)
-    //todo: fix to a string ex: 2h 20m
     private Long durationSeconds;
 
-    //todo: fix to accept yyyy-MM-dd
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
     private String studioName;
 
-    //todo: change to list and treat with ;
-    private String cast;
+    private List<String> cast;
 
     @NotEmpty
     private List<Long> movieGenresIds;
