@@ -6,7 +6,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.com.reservation.application.config.exception.MissingHeaderException;
 import org.com.reservation.domain.entity.User;
 import org.com.reservation.domain.entity.UserRole;
 import org.com.reservation.domain.interfaces.dataprovider.UserDataProvider;
@@ -38,7 +37,8 @@ public class SecurityFilter extends OncePerRequestFilter {
         String authorizationHeader = getAuthToken(request);
 
         if (authorizationHeader == null) {
-            throw new MissingHeaderException("Authorization");
+            response.sendError(401, "Header is missing: Authorization");
+            return;
         } else {
             authorizationHeader = authorizationHeader.replaceAll("Bearer ", "");
         }
