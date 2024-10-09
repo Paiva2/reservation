@@ -10,4 +10,11 @@
             created="2024-10-08"
             file="classpath:db/changelog/2.0.0/4-add-active-column-sessions.sql"
     />
+
+    <include
+            labels="5-add-create-initial-rooms"
+            author="paiva2"
+            created="2024-10-08"
+            file="classpath:db/changelog/2.0.0/5-add-create-initial-rooms.sql"
+    />
 </databaseChangeLog>
