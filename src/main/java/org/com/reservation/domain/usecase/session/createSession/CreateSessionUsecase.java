@@ -111,6 +111,10 @@ public class CreateSessionUsecase {
         if (input.getStart().after(input.getEnd())) {
             throw new InvalidDateException("Start date can't be after end date!");
         }
+
+        if (input.getStart().equals(input.getEnd())) {
+            throw new InvalidDateException("Start date can't be equals end date!");
+        }
     }
 
     private void checkSessionPeriodAvailable(CreateSessionInput input) {
