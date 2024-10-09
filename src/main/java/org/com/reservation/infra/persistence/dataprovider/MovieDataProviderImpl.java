@@ -28,4 +28,11 @@ public class MovieDataProviderImpl implements MovieDataProvider {
         MovieEntity moviePersisted = movieRepository.save(movieEntity);
         return MovieMapper.toMovie(moviePersisted);
     }
+
+    @Override
+    public Optional<Movie> findById(Long movieId) {
+        Optional<MovieEntity> movieEntity = movieRepository.findById(movieId);
+        if (!movieEntity.isPresent()) return Optional.empty();
+        return Optional.of(MovieMapper.toMovie(movieEntity.get()));
+    }
 }

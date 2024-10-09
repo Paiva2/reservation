@@ -1,9 +1,11 @@
 package org.com.reservation.application.config;
 
-import org.com.reservation.application.config.exception.MissingHeaderException;
 import org.com.reservation.domain.usecase.common.exception.InvalidDateException;
+import org.com.reservation.domain.usecase.common.exception.MovieNotFoundException;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.GenresNotFoundException;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.MovieTitleAlreadyExistsException;
+import org.com.reservation.domain.usecase.session.createSession.exception.RoomsNotFoundException;
+import org.com.reservation.domain.usecase.session.createSession.exception.SessionPeriodUnavailableException;
 import org.com.reservation.domain.usecase.user.common.InvalidPermissionsException;
 import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
 import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
@@ -84,9 +86,19 @@ public class RestControllerExceptionConfig {
         return new ResponseEntity<>(mapErrors(ex, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(MissingHeaderException.class)
-    public ResponseEntity<Map<String, String>> handleMissingHeaderException(MissingHeaderException ex) {
-        return new ResponseEntity<>(mapErrors(ex, HttpStatus.FORBIDDEN.value()), HttpStatus.FORBIDDEN);
+    @ExceptionHandler(MovieNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleMovieNotFoundException(MovieNotFoundException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RoomsNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleRoomsNotFoundException(RoomsNotFoundException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SessionPeriodUnavailableException.class)
+    public ResponseEntity<Map<String, String>> handleSessionPeriodUnavailableException(SessionPeriodUnavailableException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT);
     }
 
     private Map<String, String> mapErrors(Exception ex, int statusValue) {

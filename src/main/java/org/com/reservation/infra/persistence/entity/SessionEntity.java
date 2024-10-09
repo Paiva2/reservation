@@ -15,9 +15,10 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TB_SESSIONS")
+@SequenceGenerator(name = "session_local_seq", sequenceName = "tb_sessions_ss_id_seq", allocationSize = 1)
 public class SessionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "session_local_seq")
     @Column(name = "SS_ID")
     private Long id;
 
@@ -26,6 +27,9 @@ public class SessionEntity {
 
     @Column(name = "SS_END", nullable = false)
     private Date end;
+
+    @Column(name = "SS_ACTIVE", nullable = false)
+    private boolean active;
 
     @Column(name = "SS_CREATED_AT", updatable = false, nullable = false)
     @CreationTimestamp

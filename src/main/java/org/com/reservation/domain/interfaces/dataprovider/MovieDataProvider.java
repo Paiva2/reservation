@@ -8,4 +8,6 @@ public interface MovieDataProvider {
     Optional<Movie> findMovieByTitle(String name);
 
     Movie persist(Movie movie);
+
+    Optional<Movie> findById(Long movieId);
 }

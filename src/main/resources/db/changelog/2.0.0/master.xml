@@ -5,16 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
 >
     <include
+            labels="4-add-active-column-sessions"
             author="paiva2"
-            labels="1.0.0"
-            created="2024-10-05"
-            file="classpath:db/changelog/1.0.0/master.xml"
-    />
-
-    <include
-            author="paiva2"
-            labels="2.0.0"
             created="2024-10-08"
-            file="classpath:db/changelog/2.0.0/master.xml"
+            file="classpath:db/changelog/2.0.0/4-add-active-column-sessions.sql"
     />
 </databaseChangeLog>

@@ -16,6 +16,7 @@ public class Session {
     private Long id;
     private Date start;
     private Date end;
+    private boolean active;
     private Date createdAt;
     private Date updatedAt;
 
