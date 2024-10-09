@@ -7,6 +7,8 @@ import org.com.reservation.infra.annotations.DataProvider;
 import org.com.reservation.infra.persistence.entity.RoomEntity;
 import org.com.reservation.infra.persistence.mapper.RoomMapper;
 import org.com.reservation.infra.persistence.repository.RoomRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,5 +30,11 @@ public class RoomDataProviderImpl implements RoomDataProvider {
     public List<Room> findManyById(Set<Long> ids) {
         List<RoomEntity> rooms = roomRepository.findAllById(ids);
         return rooms.stream().map(RoomMapper::toRoom).toList();
+    }
+
+    @Override
+    public Page<Room> findAvailables(Pageable pageable) {
+        Page<RoomEntity> roomEntities = roomRepository.findAllAvailable(pageable);
+        return roomEntities.map(RoomMapper::toRoom);
     }
 }
