@@ -39,3 +39,9 @@ jwt:
   priv-rsa: ${PRIVATE_KEY}
   pub-rsa: ${PUBLIC_KEY}
   issuer: "reservation-app"
+
+cache:
+  redis:
+    host: localhost
+    port: 6379
+    password: redis
