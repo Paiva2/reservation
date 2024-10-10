@@ -19,4 +19,6 @@ public class Room {
     private Date updatedAt;
     private List<RoomSeat> seats;
     private List<RoomSession> roomSessions;
+
+    private Long totalSeats;
 }

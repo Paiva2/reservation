@@ -17,4 +17,18 @@
             created="2024-10-08"
             file="classpath:db/changelog/2.0.0/5-add-create-initial-rooms.sql"
     />
+
+    <include
+            labels="6-add-initial-seats"
+            author="paiva2"
+            created="2024-10-08"
+            file="classpath:db/changelog/2.0.0/6-add-initial-seats.sql"
+    />
+
+    <include
+            labels="7-create-initial-room-seats"
+            author="paiva2"
+            created="2024-10-08"
+            file="classpath:db/changelog/2.0.0/7-create-initial-room-seats.sql"
+    />
 </databaseChangeLog>

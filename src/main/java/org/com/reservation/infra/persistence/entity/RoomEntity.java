@@ -37,4 +37,7 @@ public class RoomEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
     private List<RoomSessionEntity> roomSessions;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    private List<RoomSeatEntity> roomSeats;
 }

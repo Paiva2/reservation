@@ -28,12 +28,14 @@ public class ListAvailableRoomsOutput {
     public static class RoomOutput {
         private Long id;
         private String number;
+        private Long totalSeats;
     }
 
     public static RoomOutput convertRoom(Room room) {
         return RoomOutput.builder()
             .id(room.getId())
             .number(room.getNumber())
+            .totalSeats(room.getTotalSeats())
             .build();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 
     @Query("SELECT rm FROM RoomEntity rm " +
+        "JOIN rm.roomSeats rms " +
         "JOIN FETCH rm.roomSessions rs " +
         "JOIN FETCH rs.session ss " +
         "WHERE ss.active = true " +

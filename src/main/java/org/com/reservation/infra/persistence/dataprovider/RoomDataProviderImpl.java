@@ -7,6 +7,7 @@ import org.com.reservation.infra.annotations.DataProvider;
 import org.com.reservation.infra.persistence.entity.RoomEntity;
 import org.com.reservation.infra.persistence.mapper.RoomMapper;
 import org.com.reservation.infra.persistence.repository.RoomRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,6 +28,7 @@ public class RoomDataProviderImpl implements RoomDataProvider {
     }
 
     @Override
+    @Cacheable(value = "find_list_rooms", key = "#listRooms", condition = "#listRooms != null")
     public List<Room> findManyById(Set<Long> ids) {
         List<RoomEntity> rooms = roomRepository.findAllById(ids);
         return rooms.stream().map(RoomMapper::toRoom).toList();
@@ -35,6 +37,6 @@ public class RoomDataProviderImpl implements RoomDataProvider {
     @Override
     public Page<Room> findAvailables(Pageable pageable) {
         Page<RoomEntity> roomEntities = roomRepository.findAllAvailable(pageable);
-        return roomEntities.map(RoomMapper::toRoom);
+        return roomEntities.map(RoomMapper::toRoomCountingSeats);
     }
 }
