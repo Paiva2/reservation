@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 import org.com.reservation.domain.entity.Movie;
 import org.com.reservation.domain.entity.RoomSession;
 import org.com.reservation.domain.entity.Session;
+import org.com.reservation.domain.interfaces.utils.DateUtils;
+import org.com.reservation.infra.utils.DateUtilsImpl;
 
-import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class ListUpcomingSessionsOutput {
     private Integer totalPages;
     private Boolean isLastPage;
     private List<SessionOutput> items;
+    
+    private static final DateUtils dateUtils = new DateUtilsImpl();
 
     @AllArgsConstructor
     @NoArgsConstructor
@@ -29,9 +32,7 @@ public class ListUpcomingSessionsOutput {
     @Data
     public static class SessionOutput {
         private Long id;
-        // todo: formatar
         private String start;
-        // todo: formatar
         private String end;
         private Boolean active;
 
@@ -40,8 +41,8 @@ public class ListUpcomingSessionsOutput {
 
         public SessionOutput(Session session) {
             this.id = session.getId();
-            this.start = session.getStart().toString();
-            this.end = session.getEnd().toString();
+            this.start = dateUtils.formatDateTime(session.getStart());
+            this.end = dateUtils.formatDateTime(session.getEnd());
             this.active = session.isActive();
             this.movie = new MovieOutput(session.getMovie());
             this.rooms = session.getRoomSessions().stream().map(ListUpcomingSessionsOutput::toRoomOutput).toList();
@@ -59,7 +60,7 @@ public class ListUpcomingSessionsOutput {
         private String posterImage;
         private String trailerVideoUrl;
         private Long durationSeconds;
-        private Date releaseDate;
+        private String releaseDate;
         private String studioName;
         private String cast;
 
@@ -70,7 +71,7 @@ public class ListUpcomingSessionsOutput {
             this.posterImage = movie.getPosterImage();
             this.trailerVideoUrl = movie.getTrailerVideoUrl();
             this.durationSeconds = movie.getDurationSeconds();
-            this.releaseDate = movie.getReleaseDate();
+            this.releaseDate = dateUtils.formatDate(movie.getReleaseDate());
             this.studioName = movie.getStudioName();
             this.cast = movie.getCast();
         }

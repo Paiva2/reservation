@@ -32,7 +32,7 @@ public class ListUpComingSessionsUsecase {
     }
 
     private Page<Session> findSessions(int page, int size, Long movieId) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.DESC, "SS_START");
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "SS_START");
         return sessionDataProvider.findAllUpcoming(pageable, movieId);
     }
 
