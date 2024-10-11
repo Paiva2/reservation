@@ -1,10 +1,15 @@
 package org.com.reservation.infra.persistence.mapper;
 
 import org.com.reservation.domain.entity.Movie;
+import org.com.reservation.domain.entity.RoomSession;
 import org.com.reservation.domain.entity.Session;
 import org.com.reservation.infra.persistence.entity.MovieEntity;
+import org.com.reservation.infra.persistence.entity.RoomSessionEntity;
 import org.com.reservation.infra.persistence.entity.SessionEntity;
 import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionMapper {
     public static Session toSession(SessionEntity sessionEntity) {
@@ -17,6 +22,16 @@ public class SessionMapper {
             session.setMovie(movie);
 
             copyProperties(sessionEntity.getMovie(), session.getMovie());
+        }
+
+        if (sessionEntity.getRoomSessions() != null) {
+            List<RoomSession> roomSessions = new ArrayList<>();
+
+            for (RoomSessionEntity roomSessionEntity : sessionEntity.getRoomSessions()) {
+                roomSessions.add(RoomSessionMapper.toRoomSession(roomSessionEntity));
+            }
+
+            session.setRoomSessions(roomSessions);
         }
 
         return session;
