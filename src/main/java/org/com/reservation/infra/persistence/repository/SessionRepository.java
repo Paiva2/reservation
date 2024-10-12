@@ -4,9 +4,13 @@ import org.com.reservation.infra.persistence.entity.SessionEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
@@ -16,4 +20,17 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
         "AND date_trunc('day', ss.ss_start) >= date_trunc('day', current_date) " +
         "AND (:movieId IS NULL OR ss.ss_movie_id = :movieId) ", nativeQuery = true)
     Page<SessionEntity> findAllUpcoming(@Param("movieId") Long movieId, Pageable pageable);
+
+    @Modifying
+    @Query(value = "DELETE FROM tb_sessions ss WHERE ss.ss_movie_id = :movieId RETURNING *", nativeQuery = true)
+    List<SessionEntity> deleteAllByMovieId(@Param("movieId") Long movieId);
+
+    @Query("SELECT ss FROM SessionEntity ss " +
+        "JOIN FETCH ss.roomSessions rs " +
+        "WHERE rs.room.id IN (:roomIds) " +
+        "AND ss.active IS TRUE " +
+        "AND ss.end >= :start")
+    List<SessionEntity> findActiveByPeriodAndListOfRoomIds(@Param("start") Date start, @Param("roomIds") List<Long> roomIds);
+
+    List<SessionEntity> findAllByMovieId(Long movieId);
 }

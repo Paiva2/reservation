@@ -1,13 +1,13 @@
 package org.com.reservation.domain.usecase.session.createSession.exception;
 
 import java.text.MessageFormat;
-import java.util.List;
 
 public class SessionPeriodUnavailableException extends RuntimeException {
-    public static final String MESSAGE = "Room {0} already being used by other Session on this period! Session: {1}";
+    public static final String MESSAGE = "Rooms {0} already being used by other Session on this period! Sessions: {1}";
+    public static final String MESSAGE_MANY = "There are rooms being used on this period by other session: {0}";
 
-    public SessionPeriodUnavailableException(List<Long> rooms, List<Long> sessions) {
-        super(MessageFormat.format(MESSAGE, rooms, sessions));
+    public SessionPeriodUnavailableException(String roomsSessions) {
+        super(MessageFormat.format(MESSAGE_MANY, roomsSessions));
     }
 
     public SessionPeriodUnavailableException(Long rooom, Long session) {

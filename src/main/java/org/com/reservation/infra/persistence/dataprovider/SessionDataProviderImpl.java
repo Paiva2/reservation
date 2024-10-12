@@ -10,6 +10,9 @@ import org.com.reservation.infra.persistence.repository.SessionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
+import java.util.List;
+
 @AllArgsConstructor
 @DataProvider
 public class SessionDataProviderImpl implements SessionDataProvider {
@@ -25,5 +28,22 @@ public class SessionDataProviderImpl implements SessionDataProvider {
     public Page<Session> findAllUpcoming(Pageable pageable, Long movieId) {
         Page<SessionEntity> sessionPage = sessionRepository.findAllUpcoming(movieId, pageable);
         return sessionPage.map(SessionMapper::toSession);
+    }
+
+    @Override
+    public List<Session> deleteAllByMovie(Long movieId) {
+        List<SessionEntity> deletedSessions = sessionRepository.deleteAllByMovieId(movieId);
+        return deletedSessions.stream().map(SessionMapper::toSession).toList();
+    }
+
+    @Override
+    public List<Session> findByMovieId(Long movieId) {
+        List<SessionEntity> sessionEntities = sessionRepository.findAllByMovieId(movieId);
+        return sessionEntities.stream().map(SessionMapper::toSession).toList();
+    }
+
+    public List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds) {
+        List<SessionEntity> sessionEntities = sessionRepository.findActiveByPeriodAndListOfRoomIds(start, roomIds);
+        return sessionEntities.stream().map(SessionMapper::toSession).toList();
     }
 }

@@ -16,6 +16,7 @@ import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundExce
 import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Builder
@@ -118,12 +119,16 @@ public class CreateSessionUsecase {
     }
 
     private void checkSessionPeriodAvailable(CreateSessionInput input) {
-        List<RoomSession> roomsSessions = roomSessionDataProvider.findActiveByPeriodAndListOfIds(input.getStart(), input.getEnd(), input.getRoomsIds());
+        List<Session> sessionsOnPeriod = sessionDataProvider.findActiveSessionsByPeriodAndRooms(input.getStart(), input.getRoomsIds());
+        List<String> sessionsRooms = new ArrayList<>();
 
-        if (!roomsSessions.isEmpty()) {
-            List<Long> rooms = roomsSessions.stream().map(roomSession -> roomSession.getRoom().getId()).toList();
-            List<Long> sessions = roomsSessions.stream().map(roomSession -> roomSession.getSession().getId()).toList();
-            throw new SessionPeriodUnavailableException(rooms, sessions);
+        if (!sessionsOnPeriod.isEmpty()) {
+            sessionsOnPeriod.forEach(session -> {
+                String roomsHavingThisSession = session.getRoomSessions().stream().map(RoomSession::getRoom).map(Room::getNumber).map(Object::toString).collect(Collectors.joining(", "));
+                sessionsRooms.add("Session: " + session.getId() + " - rooms number: " + roomsHavingThisSession);
+            });
+
+            throw new SessionPeriodUnavailableException(sessionsRooms.toString());
         }
     }
 
@@ -133,8 +138,12 @@ public class CreateSessionUsecase {
     }
 
     private Session fillSession(Movie movie, CreateSessionInput input) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getDefault());
+        calendar.setTime(input.getStart());
+
         return Session.builder()
-            .start(input.getStart())
+            .start(calendar.getTime())
             .end(input.getEnd())
             .movie(movie)
             .active(true)

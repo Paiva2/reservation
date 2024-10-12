@@ -4,8 +4,17 @@ import org.com.reservation.domain.entity.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
+import java.util.List;
+
 public interface SessionDataProvider {
     Session persist(Session session);
 
     Page<Session> findAllUpcoming(Pageable pageable, Long movieId);
+
+    List<Session> deleteAllByMovie(Long movieId);
+
+    List<Session> findByMovieId(Long movieId);
+
+    List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds);
 }
