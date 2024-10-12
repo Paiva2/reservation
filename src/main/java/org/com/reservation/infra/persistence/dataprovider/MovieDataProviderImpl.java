@@ -35,4 +35,9 @@ public class MovieDataProviderImpl implements MovieDataProvider {
         if (!movieEntity.isPresent()) return Optional.empty();
         return Optional.of(MovieMapper.toMovie(movieEntity.get()));
     }
+
+    @Override
+    public void delete(Movie movie) {
+        movieRepository.deleteById(movie.getId());
+    }
 }

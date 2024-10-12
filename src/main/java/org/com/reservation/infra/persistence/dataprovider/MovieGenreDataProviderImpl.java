@@ -26,4 +26,9 @@ public class MovieGenreDataProviderImpl implements MovieGenreDataProvider {
         List<MovieGenreEntity> movieGenreEntities = movieGenreRepository.saveAll(movieGenres.stream().map(MovieGenreMapper::toMovieGenreEntity).toList());
         return movieGenreEntities.stream().map(MovieGenreMapper::toMovieGenre).toList();
     }
+
+    @Override
+    public void deleteAllByMovieId(Long movieId) {
+        movieGenreRepository.deleteAllByMovieId(movieId);
+    }
 }

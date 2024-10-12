@@ -8,4 +8,6 @@ public interface MovieGenreDataProvider {
     MovieGenre persist(MovieGenre movieGenre);
 
     List<MovieGenre> persistAll(List<MovieGenre> movieGenres);
+
+    void deleteAllByMovieId(Long movieId);
 }

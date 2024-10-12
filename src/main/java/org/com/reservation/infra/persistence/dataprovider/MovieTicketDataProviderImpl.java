@@ -18,4 +18,9 @@ public class MovieTicketDataProviderImpl implements MovieTicketDataProvider {
         MovieTicketEntity movieTicketPersisted = movieTicketRepository.save(MovieTicketMapper.toMovieTicketEntity(movieTicket));
         return MovieTicketMapper.toMovieTicket(movieTicketPersisted);
     }
+
+    @Override
+    public void deleteByMovie(Long movieId) {
+        movieTicketRepository.deleteByMovieId(movieId);
+    }
 }

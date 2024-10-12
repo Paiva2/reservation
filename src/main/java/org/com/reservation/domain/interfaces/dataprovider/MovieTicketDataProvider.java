@@ -4,4 +4,6 @@ import org.com.reservation.domain.entity.MovieTicket;
 
 public interface MovieTicketDataProvider {
     MovieTicket persist(MovieTicket movieTicket);
+
+    void deleteByMovie(Long movieId);
 }

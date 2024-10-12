@@ -10,4 +10,6 @@ public interface MovieDataProvider {
     Movie persist(Movie movie);
 
     Optional<Movie> findById(Long movieId);
+
+    void delete(Movie movie);
 }
