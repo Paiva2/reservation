@@ -28,4 +28,5 @@ public class Movie {
     private List<MovieGenre> movieGenres;
     private List<Reservation> reservations;
     private List<Session> sessions;
+    private MovieTicket movieTicket;
 }

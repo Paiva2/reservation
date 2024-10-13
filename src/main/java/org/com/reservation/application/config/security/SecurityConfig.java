@@ -29,6 +29,7 @@ public class SecurityConfig {
             req.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll();
             req.requestMatchers("/api/v1/user/register").permitAll();
             req.requestMatchers("/api/v1/user/login").permitAll();
+            req.requestMatchers("/api/v1/movie/list").permitAll();
             req.anyRequest().authenticated();
         });
 

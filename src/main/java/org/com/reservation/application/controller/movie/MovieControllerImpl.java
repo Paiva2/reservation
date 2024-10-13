@@ -2,7 +2,9 @@ package org.com.reservation.application.controller.movie;
 
 import lombok.AllArgsConstructor;
 import org.com.reservation.application.controller.dto.input.user.RegisterMovieInput;
+import org.com.reservation.application.controller.dto.output.movie.ListAllMoviesOutput;
 import org.com.reservation.domain.usecase.movie.deleteMovie.DeleteMovieUsecase;
+import org.com.reservation.domain.usecase.movie.listAllMovies.ListAllMoviesUsecase;
 import org.com.reservation.domain.usecase.movie.registerMovie.RegisterMovieUsecase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +12,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 
 @RestController
 @AllArgsConstructor
 public class MovieControllerImpl implements MovieController {
     private final RegisterMovieUsecase registerMovieUsecase;
     private final DeleteMovieUsecase deleteMovieUsecase;
+    private final ListAllMoviesUsecase listAllMoviesUsecase;
 
     @Override
     @Transactional
@@ -31,5 +36,11 @@ public class MovieControllerImpl implements MovieController {
         Long subject = Long.valueOf(authentication.getName());
         deleteMovieUsecase.execute(subject, movieId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<ListAllMoviesOutput> listAll(Integer page, Integer size, String title, String genre, Date date) {
+        ListAllMoviesOutput output = listAllMoviesUsecase.execute(page, size, title, genre, date);
+        return new ResponseEntity<>(output, HttpStatus.OK);
     }
 }

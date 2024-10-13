@@ -73,7 +73,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         switch (request.getServletPath()) {
             case "/api/v1/user/login",
-                 "/api/v1/user/register" -> skipFilter = true;
+                 "/api/v1/user/register",
+                 "/api/v1/movie/list" -> skipFilter = true;
         }
 
         return skipFilter;

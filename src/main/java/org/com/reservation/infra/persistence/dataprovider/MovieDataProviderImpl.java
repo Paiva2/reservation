@@ -7,7 +7,10 @@ import org.com.reservation.infra.annotations.DataProvider;
 import org.com.reservation.infra.persistence.entity.MovieEntity;
 import org.com.reservation.infra.persistence.mapper.MovieMapper;
 import org.com.reservation.infra.persistence.repository.MovieRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -39,5 +42,11 @@ public class MovieDataProviderImpl implements MovieDataProvider {
     @Override
     public void delete(Movie movie) {
         movieRepository.deleteById(movie.getId());
+    }
+
+    @Override
+    public Page<Movie> findAllPageable(Pageable pageable, String title, String genre, Date date) {
+        Page<MovieEntity> moviesPageable = movieRepository.findAllFilterable(pageable, title, genre, date);
+        return moviesPageable.map(MovieMapper::toMovie);
     }
 }
