@@ -21,4 +21,6 @@ public class Seat {
     private Date createdAt;
     private Date updatedAt;
     private List<RoomSeat> roomSeats;
+
+    private Boolean available;
 }

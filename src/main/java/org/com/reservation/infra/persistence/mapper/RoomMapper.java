@@ -21,12 +21,15 @@ public class RoomMapper {
 
             for (RoomSeatEntity roomSeatEntity : roomEntity.getRoomSeats()) {
                 RoomSeat roomSeat = new RoomSeat();
+                Room roomCopy = new Room();
                 Seat seat = new Seat();
-                copyProperties(roomSeatEntity, roomSeat);
-                roomSeat.setRoom(room);
+
+                roomSeat.setRoom(roomCopy);
                 roomSeat.setSeat(seat);
 
+                copyProperties(roomSeatEntity, roomSeat);
                 copyProperties(roomSeatEntity.getSeat(), roomSeat.getSeat());
+                copyProperties(roomSeatEntity.getRoom(), roomSeat.getRoom());
 
                 roomSeats.add(roomSeat);
             }

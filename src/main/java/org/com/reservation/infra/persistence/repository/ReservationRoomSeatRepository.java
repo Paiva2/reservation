@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReservationRoomSeatRepository extends JpaRepository<ReservationRoomSeatEntity, ReservationRoomSeatEntity.KeyId> {
 
@@ -15,4 +17,11 @@ public interface ReservationRoomSeatRepository extends JpaRepository<Reservation
         "WHERE rrs.reservation.id = :reservationId " +
         "AND rrs.reservation.session.id = :sessionId")
     void deleteAllByReservationIdAndSessionId(@Param("reservationId") Long reservationId, @Param("sessionId") Long sessionId);
+
+    @Query("SELECT rrs FROM ReservationRoomSeatEntity rrs " +
+        "JOIN FETCH rrs.roomSeat rs " +
+        "JOIN FETCH rs.room rm " +
+        "WHERE rrs.reservation.id = :reservationId " +
+        "AND rm.id = :roomId")
+    List<ReservationRoomSeatEntity> findByReservationAndRoom(@Param("reservationId") Long reservationId, @Param("roomId") Long roomId);
 }

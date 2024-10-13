@@ -2,9 +2,11 @@ package org.com.reservation.application.controller.session;
 
 import lombok.AllArgsConstructor;
 import org.com.reservation.application.controller.dto.input.session.CreateSessionInput;
+import org.com.reservation.application.controller.dto.output.roomSeat.GetAvailableRoomSeatsOnSessionOutput;
 import org.com.reservation.application.controller.dto.output.session.CreateSessionOutput;
 import org.com.reservation.application.controller.dto.output.session.ListUpcomingSessionsOutput;
 import org.com.reservation.domain.usecase.session.createSession.CreateSessionUsecase;
+import org.com.reservation.domain.usecase.session.getAvailableRoomSeatsOnSession.GetAvailableRoomSeatsOnSessionUsecase;
 import org.com.reservation.domain.usecase.session.listUpcomingSessions.ListUpComingSessionsUsecase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SessionControllerImpl implements SessionController {
     private final CreateSessionUsecase createSessionUsecase;
     private final ListUpComingSessionsUsecase listUpComingSessionsUsecase;
+    private final GetAvailableRoomSeatsOnSessionUsecase getAvailableRoomSeatsOnSessionUsecase;
 
     @Override
     @Transactional
@@ -29,6 +32,12 @@ public class SessionControllerImpl implements SessionController {
     @Override
     public ResponseEntity<ListUpcomingSessionsOutput> listUpcoming(Long movieId, Integer page, Integer size) {
         ListUpcomingSessionsOutput output = listUpComingSessionsUsecase.execute(page, size, movieId);
+        return new ResponseEntity<>(output, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<GetAvailableRoomSeatsOnSessionOutput> getAvailableSeatsOnSession(Long sessionId, Long roomId) {
+        GetAvailableRoomSeatsOnSessionOutput output = getAvailableRoomSeatsOnSessionUsecase.execute(sessionId, roomId);
         return new ResponseEntity<>(output, HttpStatus.OK);
     }
 }

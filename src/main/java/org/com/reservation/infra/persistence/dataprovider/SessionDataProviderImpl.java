@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @DataProvider
@@ -45,5 +46,12 @@ public class SessionDataProviderImpl implements SessionDataProvider {
     public List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds) {
         List<SessionEntity> sessionEntities = sessionRepository.findActiveByPeriodAndListOfRoomIds(start, roomIds);
         return sessionEntities.stream().map(SessionMapper::toSession).toList();
+    }
+
+    @Override
+    public Optional<Session> findActiveById(Long id) {
+        Optional<SessionEntity> sessionEntity = sessionRepository.findActiveById(id);
+        if (sessionEntity.isEmpty()) return Optional.empty();
+        return Optional.of(SessionMapper.toSession(sessionEntity.get()));
     }
 }

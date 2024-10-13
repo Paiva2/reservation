@@ -9,6 +9,7 @@ import org.com.reservation.infra.persistence.mapper.RoomSessionMapper;
 import org.com.reservation.infra.persistence.repository.RoomSessionRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @DataProvider
@@ -31,5 +32,12 @@ public class RoomSessionDataProviderImpl implements RoomSessionDataProvider {
     @Override
     public void deleteAllBySessionId(Long sessionId) {
         roomSessionRepository.deleteAllBySessionId(sessionId);
+    }
+
+    @Override
+    public Optional<RoomSession> findBySessionAndRoom(Long sessionId, Long roomId) {
+        Optional<RoomSessionEntity> roomSessionEntity = roomSessionRepository.findBySessionAndRoom(sessionId, roomId);
+        if (roomSessionEntity.isEmpty()) return Optional.empty();
+        return Optional.of(RoomSessionMapper.toRoomSession(roomSessionEntity.get()));
     }
 }

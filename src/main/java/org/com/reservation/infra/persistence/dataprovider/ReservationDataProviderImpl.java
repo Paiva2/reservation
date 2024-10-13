@@ -20,4 +20,10 @@ public class ReservationDataProviderImpl implements ReservationDataProvider {
         List<ReservationEntity> deletedReservations = reservationRespository.deleteAllBySessionId(sessionId);
         return deletedReservations.stream().map(ReservationMapper::toReservation).toList();
     }
+
+    @Override
+    public List<Reservation> findAllBySession(Long sessionId) {
+        List<ReservationEntity> reservationEntities = reservationRespository.findAllBySessionId(sessionId);
+        return reservationEntities.stream().map(ReservationMapper::toReservation).toList();
+    }
 }

@@ -2,6 +2,7 @@ package org.com.reservation.application.controller.session;
 
 import jakarta.validation.Valid;
 import org.com.reservation.application.controller.dto.input.session.CreateSessionInput;
+import org.com.reservation.application.controller.dto.output.roomSeat.GetAvailableRoomSeatsOnSessionOutput;
 import org.com.reservation.application.controller.dto.output.session.CreateSessionOutput;
 import org.com.reservation.application.controller.dto.output.session.ListUpcomingSessionsOutput;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +18,7 @@ public interface SessionController {
 
     @GetMapping("/list/upcoming")
     ResponseEntity<ListUpcomingSessionsOutput> listUpcoming(@RequestParam(value = "movieId", required = false) Long movieId, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "5") Integer size);
+
+    @GetMapping("{sessionId}/room/{roomId}/seats/available")
+    ResponseEntity<GetAvailableRoomSeatsOnSessionOutput> getAvailableSeatsOnSession(@PathVariable Long sessionId, @PathVariable Long roomId);
 }

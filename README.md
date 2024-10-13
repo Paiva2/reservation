@@ -33,7 +33,8 @@ of the system. However here are some requirements that you can consider:
 ## Reservation Management
 
 - [x] Users should be able to get the movies and their show times for a specific date and genre.
-- Users should be able to reserve seats for a showtime, see the available seats, and select the seats they want.
+- [x] Users should be able to see the available seats for a specific Session and Room.
+- Users should be able to reserve seats for a showtime choosing the seats they want (If available).
 - Users should be able to see their reservations and cancel them (only upcoming ones).
 - Admins should be able to see all reservations, capacity, and revenue.
 

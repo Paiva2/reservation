@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ReservationDataProvider {
     List<Reservation> deleteAllBySessionId(Long sessionId);
+    
+    List<Reservation> findAllBySession(Long sessionId);
 }

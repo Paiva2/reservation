@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface SessionDataProvider {
     Session persist(Session session);
@@ -17,4 +18,6 @@ public interface SessionDataProvider {
     List<Session> findByMovieId(Long movieId);
 
     List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds);
+
+    Optional<Session> findActiveById(Long id);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
@@ -35,4 +36,7 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
     List<SessionEntity> findActiveByPeriodAndListOfRoomIds(@Param("start") Date start, @Param("roomIds") List<Long> roomIds);
 
     List<SessionEntity> findAllByMovieId(Long movieId);
+
+    @Query("SELECT ss FROM SessionEntity ss WHERE ss.id = :id AND ss.active = TRUE")
+    Optional<SessionEntity> findActiveById(@Param("id") Long id);
 }
