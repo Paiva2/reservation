@@ -1,12 +1,17 @@
 package org.com.reservation.infra.persistence.mapper;
 
 import org.com.reservation.domain.entity.Room;
+import org.com.reservation.domain.entity.RoomSeat;
 import org.com.reservation.domain.entity.RoomSession;
 import org.com.reservation.domain.entity.Session;
 import org.com.reservation.infra.persistence.entity.RoomEntity;
+import org.com.reservation.infra.persistence.entity.RoomSeatEntity;
 import org.com.reservation.infra.persistence.entity.RoomSessionEntity;
 import org.com.reservation.infra.persistence.entity.SessionEntity;
 import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoomSessionMapper {
     public static RoomSession toRoomSession(RoomSessionEntity roomSessionEntity) {
@@ -20,6 +25,19 @@ public class RoomSessionMapper {
             roomSession.setRoom(room);
 
             copyProperties(roomSessionEntity.getRoom(), roomSession.getRoom());
+
+            if (roomSessionEntity.getRoom().getRoomSeats() != null) {
+                List<RoomSeat> roomSeats = new ArrayList<>();
+
+                for (RoomSeatEntity roomSeatEntity : roomSessionEntity.getRoom().getRoomSeats()) {
+                    RoomSeat roomSeat = new RoomSeat();
+                    copyProperties(roomSeatEntity, roomSeat);
+
+                    roomSeats.add(roomSeat);
+                }
+
+                room.setSeats(roomSeats);
+            }
         }
 
         if (roomSessionEntity.getSession() != null) {

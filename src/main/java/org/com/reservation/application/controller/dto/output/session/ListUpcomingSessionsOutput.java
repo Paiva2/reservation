@@ -23,7 +23,7 @@ public class ListUpcomingSessionsOutput {
     private Integer totalPages;
     private Boolean isLastPage;
     private List<SessionOutput> items;
-    
+
     private static final DateUtils dateUtils = new DateUtilsImpl();
 
     @AllArgsConstructor
@@ -84,12 +84,14 @@ public class ListUpcomingSessionsOutput {
     public static class RoomOutput {
         private Long id;
         private String number;
+        private Integer totalSeats;
     }
 
     public static RoomOutput toRoomOutput(RoomSession roomSession) {
         return RoomOutput.builder()
             .id(roomSession.getRoom().getId())
             .number(roomSession.getRoom().getNumber())
+            .totalSeats(roomSession.getRoom().getSeats().size())
             .build();
     }
 }

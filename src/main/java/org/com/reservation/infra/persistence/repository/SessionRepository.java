@@ -14,11 +14,13 @@ import java.util.List;
 
 @Repository
 public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
-    @Query(value = "SELECT DISTINCT * FROM tb_sessions ss " +
-        "JOIN tb_movies mv ON mv.mo_id = ss.ss_movie_id " +
-        "WHERE ss.ss_active IS TRUE " +
-        "AND date_trunc('day', ss.ss_start) >= date_trunc('day', current_date) " +
-        "AND (:movieId IS NULL OR ss.ss_movie_id = :movieId) ", nativeQuery = true)
+    @Query(value = """ 
+            SELECT * FROM tb_sessions ss
+            JOIN tb_movies mv ON mv.mo_id = ss.ss_movie_id
+            WHERE ss.ss_active IS TRUE
+            AND date_trunc('day', ss.ss_start) >= date_trunc('day', current_date)
+            AND (:movieId IS NULL OR ss.ss_movie_id = :movieId)
+        """, nativeQuery = true)
     Page<SessionEntity> findAllUpcoming(@Param("movieId") Long movieId, Pageable pageable);
 
     @Modifying
