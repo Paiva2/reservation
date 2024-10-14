@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @DataProvider
@@ -19,6 +20,12 @@ public class GenreDataProviderImpl implements GenreDataProvider {
 
     @Override
     public List<Genre> findGenresByIds(List<Long> ids) {
+        List<GenreEntity> genreEntities = genreRepository.findAllById(ids);
+        return genreEntities.stream().map(GenreMapper::toGenre).toList();
+    }
+
+    @Override
+    public List<Genre> findGenresByIds(Set<Long> ids) {
         List<GenreEntity> genreEntities = genreRepository.findAllById(ids);
         return genreEntities.stream().map(GenreMapper::toGenre).toList();
     }

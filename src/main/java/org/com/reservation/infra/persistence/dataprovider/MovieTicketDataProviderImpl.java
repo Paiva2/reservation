@@ -8,6 +8,8 @@ import org.com.reservation.infra.persistence.entity.MovieTicketEntity;
 import org.com.reservation.infra.persistence.mapper.MovieTicketMapper;
 import org.com.reservation.infra.persistence.repository.MovieTicketRepository;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @DataProvider
 public class MovieTicketDataProviderImpl implements MovieTicketDataProvider {
@@ -22,5 +24,12 @@ public class MovieTicketDataProviderImpl implements MovieTicketDataProvider {
     @Override
     public void deleteByMovie(Long movieId) {
         movieTicketRepository.deleteByMovieId(movieId);
+    }
+
+    @Override
+    public Optional<MovieTicket> findByMovieId(Long movieId) {
+        Optional<MovieTicketEntity> movieTicketEntity = movieTicketRepository.findByMovieId(movieId);
+        if (movieTicketEntity.isEmpty()) return Optional.empty();
+        return Optional.of(MovieTicketMapper.toMovieTicket(movieTicketEntity.get()));
     }
 }

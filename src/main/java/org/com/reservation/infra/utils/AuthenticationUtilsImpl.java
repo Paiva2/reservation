@@ -72,9 +72,15 @@ public class AuthenticationUtilsImpl implements AuthenticationUtils {
         SignedJWT signedJWT = SignedJWT.parse(token);
         signedJWT.verify(verifier);
 
+        Date today = new Date();
+
+        if (signedJWT.getJWTClaimsSet().getExpirationTime().before(today)) {
+            throw new JOSEException("Token expired!");
+        }
+
         return signedJWT;
     }
-    
+
     private RSAKey getKeyFromPemFile(String path) throws IOException, JOSEException {
         String keyPEM = new String(Files.readAllBytes(Paths.get(path)));
         RSAKey rsaKey = RSAKey.parseFromPEMEncodedObjects(keyPEM).toRSAKey();

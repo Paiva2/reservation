@@ -25,7 +25,7 @@ of the system. However here are some requirements that you can consider:
 
 ## Movie Management
 
-- Admins should be able to add, update, and delete movies.
+- [x] Admins should be able to add, update, and delete movies.
 - [x] Each movie should have a title, description, and poster image.
 - [x] Movies should be categorized by genre.
 - [x] Movies should have showtimes.
