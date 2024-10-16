@@ -63,6 +63,7 @@ public class ListUpcomingSessionsOutput {
         private String releaseDate;
         private String studioName;
         private String cast;
+        private TicketOutput ticket;
 
         public MovieOutput(Movie movie) {
             this.id = movie.getId();
@@ -74,6 +75,13 @@ public class ListUpcomingSessionsOutput {
             this.releaseDate = dateUtils.formatDate(movie.getReleaseDate());
             this.studioName = movie.getStudioName();
             this.cast = movie.getCast();
+            this.ticket = TicketOutput.builder()
+                .id(movie.getMovieTicket().getId())
+                .normalPrice(movie.getMovieTicket().getNormalPrice().toString())
+                .studentPrice(movie.getMovieTicket().getStudentPrice().toString())
+                .specialPrice(movie.getMovieTicket().getSpecialPrice().toString())
+                .isFree(movie.getMovieTicket().getIsFree())
+                .build();
         }
     }
 
@@ -85,6 +93,18 @@ public class ListUpcomingSessionsOutput {
         private Long id;
         private String number;
         private Integer totalSeats;
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    @Data
+    public static class TicketOutput {
+        private Long id;
+        private String normalPrice;
+        private String studentPrice;
+        private String specialPrice;
+        private Boolean isFree;
     }
 
     public static RoomOutput toRoomOutput(RoomSession roomSession) {

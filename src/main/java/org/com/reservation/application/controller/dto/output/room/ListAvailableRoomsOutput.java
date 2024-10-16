@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-//todo: add total seats
 public class ListAvailableRoomsOutput {
     private Integer page;
     private Integer size;
