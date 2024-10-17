@@ -26,4 +26,10 @@ public class ReservationDataProviderImpl implements ReservationDataProvider {
         List<ReservationEntity> reservationEntities = reservationRespository.findAllBySessionId(sessionId);
         return reservationEntities.stream().map(ReservationMapper::toReservation).toList();
     }
+
+    @Override
+    public Reservation persist(Reservation reservation) {
+        ReservationEntity reservationEntity = ReservationMapper.toReservationEntity(reservation);
+        return ReservationMapper.toReservation(reservationRespository.save(reservationEntity));
+    }
 }

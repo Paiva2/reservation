@@ -15,9 +15,10 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "TB_RESERVATIONS")
+@SequenceGenerator(name = "reservation_local_seq", sequenceName = "tb_reservations_res_id_seq", allocationSize = 1)
 public class ReservationEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_local_seq")
     @Column(name = "RES_ID")
     private Long id;
 

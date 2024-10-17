@@ -6,10 +6,10 @@ import org.com.reservation.domain.entity.User;
 import org.com.reservation.domain.interfaces.dataprovider.UserDataProvider;
 import org.com.reservation.domain.interfaces.utils.AuthenticationUtils;
 import org.com.reservation.domain.interfaces.utils.PasswordUtils;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.UserNotFoundException;
 import org.com.reservation.domain.usecase.user.userAuthentication.exception.ErrorSigningAuthenticationException;
 import org.com.reservation.domain.usecase.user.userAuthentication.exception.InvalidCredentialsException;
-import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
+import org.com.reservation.domain.usecase.common.exception.UserDisabledException;
 
 @AllArgsConstructor
 @Builder

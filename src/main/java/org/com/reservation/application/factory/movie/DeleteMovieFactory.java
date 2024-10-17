@@ -18,7 +18,7 @@ public class DeleteMovieFactory {
     private final MovieDataProvider movieDataProvider;
     private final MovieGenreDataProvider movieGenreDataProvider;
     private final ReservationDataProvider reservationDataProvider;
-    private final ReservationMovieTicketDataProvider reservationMovieTicketDataProvider;
+    private final ReservationTicketDataProvider reservationTicketDataProvider;
     private final ReservationRoomSeatDataProvider reservationRoomSeatDataProvider;
     private final MovieTicketDataProvider movieTicketDataProvider;
 
@@ -33,7 +33,7 @@ public class DeleteMovieFactory {
             .movieDataProvider(movieDataProvider)
             .movieGenreDataProvider(movieGenreDataProvider)
             .reservationDataProvider(reservationDataProvider)
-            .reservationMovieTicketDataProvider(reservationMovieTicketDataProvider)
+            .reservationTicketDataProvider(reservationTicketDataProvider)
             .reservationRoomSeatDataProvider(reservationRoomSeatDataProvider)
             .movieTicketDataProvider(movieTicketDataProvider)
             .build();

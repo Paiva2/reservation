@@ -16,9 +16,11 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "TB_RESERVATIONS_TICKETS")
+@SequenceGenerator(name = "reservations_tickets_local_seq", sequenceName = "tb_reservations_tickets_rt_id_seq", allocationSize = 1)
 public class ReservationTicketEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservations_tickets_local_seq")
+    @Column(name = "RT_ID")
     private Long id;
 
     @Column(name = "RT_PRICE_PAID", nullable = false)

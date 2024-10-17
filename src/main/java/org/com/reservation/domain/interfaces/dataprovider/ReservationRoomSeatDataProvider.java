@@ -8,4 +8,8 @@ public interface ReservationRoomSeatDataProvider {
     void deleteAllByReservationIdAndSessionId(Long reservationId, Long sessionId);
 
     List<ReservationRoomSeat> findByReservationAndRoom(Long reservationId, Long roomId);
+
+    List<ReservationRoomSeat> findManyBySessionRoomSeat(Long sessionId, Long roomId, List<Long> seatsIds);
+
+    List<ReservationRoomSeat> persistAll(List<ReservationRoomSeat> reservationRoomSeats);
 }

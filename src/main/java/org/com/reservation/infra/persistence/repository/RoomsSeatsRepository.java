@@ -3,6 +3,7 @@ package org.com.reservation.infra.persistence.repository;
 import org.com.reservation.infra.persistence.entity.RoomSeatEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,11 @@ public interface RoomsSeatsRepository extends JpaRepository<RoomSeatEntity, Room
         "WHERE rm.id = :roomId " +
         "ORDER BY st.row, st.number ASC")
     List<RoomSeatEntity> findAllByRoomSorted(Long roomId);
+
+    @Query("SELECT rs FROM RoomSeatEntity rs " +
+        "JOIN FETCH rs.room rm " +
+        "JOIN FETCH rs.seat st " +
+        "WHERE rm.id = :roomId " +
+        "AND st.id IN (:ids)")
+    List<RoomSeatEntity> findManyByIdAndRoomId(@Param("roomId") Long roomId, @Param("ids") List<Long> ids);
 }

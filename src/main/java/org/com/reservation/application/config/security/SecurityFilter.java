@@ -11,7 +11,7 @@ import org.com.reservation.domain.entity.UserRole;
 import org.com.reservation.domain.interfaces.dataprovider.UserDataProvider;
 import org.com.reservation.domain.interfaces.dataprovider.UserRoleDataProvider;
 import org.com.reservation.domain.interfaces.utils.AuthenticationUtils;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.UserNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

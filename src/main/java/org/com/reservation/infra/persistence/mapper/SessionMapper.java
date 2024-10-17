@@ -1,6 +1,7 @@
 package org.com.reservation.infra.persistence.mapper;
 
 import org.com.reservation.domain.entity.Movie;
+import org.com.reservation.domain.entity.MovieTicket;
 import org.com.reservation.domain.entity.RoomSession;
 import org.com.reservation.domain.entity.Session;
 import org.com.reservation.infra.persistence.entity.MovieEntity;
@@ -22,6 +23,13 @@ public class SessionMapper {
             session.setMovie(movie);
 
             copyProperties(sessionEntity.getMovie(), session.getMovie());
+
+            if (sessionEntity.getMovie().getMovieTicket() != null) {
+                MovieTicket movieTicket = new MovieTicket();
+                movie.setMovieTicket(movieTicket);
+
+                copyProperties(sessionEntity.getMovie().getMovieTicket(), session.getMovie().getMovieTicket());
+            }
         }
 
         if (sessionEntity.getRoomSessions() != null) {

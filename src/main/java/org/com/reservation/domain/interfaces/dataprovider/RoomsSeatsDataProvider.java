@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RoomsSeatsDataProvider {
     List<RoomSeat> findAllByRoomSorted(Long roomId);
+
+    List<RoomSeat> findManyByIdAndRoom(Long roomId, List<Long> roomSeatsIds);
 }

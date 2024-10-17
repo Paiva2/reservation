@@ -1,4 +1,4 @@
-package org.com.reservation.domain.usecase.user.userAuthentication.exception;
+package org.com.reservation.domain.usecase.common.exception;
 
 public class UserDisabledException extends RuntimeException {
     private static final String MESSAGE = "User disabled!";

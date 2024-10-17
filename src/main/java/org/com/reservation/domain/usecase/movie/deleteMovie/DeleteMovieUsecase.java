@@ -6,9 +6,9 @@ import org.com.reservation.domain.entity.*;
 import org.com.reservation.domain.enumeration.EnumRole;
 import org.com.reservation.domain.interfaces.dataprovider.*;
 import org.com.reservation.domain.usecase.common.exception.MovieNotFoundException;
-import org.com.reservation.domain.usecase.user.common.InvalidPermissionsException;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
-import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
+import org.com.reservation.domain.usecase.common.exception.InvalidPermissionsException;
+import org.com.reservation.domain.usecase.common.exception.UserNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.UserDisabledException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class DeleteMovieUsecase {
     private final MovieDataProvider movieDataProvider;
     private final MovieGenreDataProvider movieGenreDataProvider;
     private final ReservationDataProvider reservationDataProvider;
-    private final ReservationMovieTicketDataProvider reservationMovieTicketDataProvider;
+    private final ReservationTicketDataProvider reservationTicketDataProvider;
     private final ReservationRoomSeatDataProvider reservationRoomSeatDataProvider;
     private final MovieTicketDataProvider movieTicketDataProvider;
 
@@ -112,7 +112,7 @@ public class DeleteMovieUsecase {
     }
 
     private void deleteReservationTickets(Long reservationId, Long sessionId) {
-        reservationMovieTicketDataProvider.deleteAllByReservationIdAndSessionId(reservationId, sessionId);
+        reservationTicketDataProvider.deleteAllByReservationIdAndSessionId(reservationId, sessionId);
     }
 
     private void deleteReservationSeats(Long reservationId, Long sessionId) {

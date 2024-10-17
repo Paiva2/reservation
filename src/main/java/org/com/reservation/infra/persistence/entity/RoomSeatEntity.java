@@ -28,12 +28,12 @@ public class RoomSeatEntity {
     @Column(name = "RST_UPDATED_AT", nullable = false)
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("roomId")
     @JoinColumn(name = "RST_ROOM_ID")
     private RoomEntity room;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("seatId")
     @JoinColumn(name = "RST_SEAT_ID")
     private SeatEntity seat;

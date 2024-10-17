@@ -11,9 +11,9 @@ import org.com.reservation.domain.usecase.common.exception.MovieNotFoundExceptio
 import org.com.reservation.domain.usecase.common.exception.MovieTicketNotFoundException;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.GenresNotFoundException;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.MovieTitleAlreadyExistsException;
-import org.com.reservation.domain.usecase.user.common.InvalidPermissionsException;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
-import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
+import org.com.reservation.domain.usecase.common.exception.InvalidPermissionsException;
+import org.com.reservation.domain.usecase.common.exception.UserNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.UserDisabledException;
 
 import java.math.BigDecimal;
 import java.util.*;

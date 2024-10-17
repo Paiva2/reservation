@@ -11,7 +11,7 @@ import org.com.reservation.domain.entity.UserRole;
 import org.com.reservation.domain.enumeration.EnumRole;
 import org.com.reservation.domain.interfaces.utils.EmailUtils;
 import org.com.reservation.domain.interfaces.utils.PasswordUtils;
-import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
+import org.com.reservation.domain.usecase.common.exception.InvalidEmailException;
 import org.com.reservation.domain.usecase.user.registerUser.exception.EmailAlreadyUsedException;
 import org.com.reservation.domain.usecase.user.registerUser.exception.InvalidPasswordException;
 import org.com.reservation.domain.usecase.user.registerUser.exception.RoleNotFoundException;

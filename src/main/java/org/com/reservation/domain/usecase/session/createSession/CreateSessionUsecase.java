@@ -11,9 +11,9 @@ import org.com.reservation.domain.usecase.common.exception.InvalidDateException;
 import org.com.reservation.domain.usecase.common.exception.MovieNotFoundException;
 import org.com.reservation.domain.usecase.session.createSession.exception.RoomsNotFoundException;
 import org.com.reservation.domain.usecase.session.createSession.exception.SessionPeriodUnavailableException;
-import org.com.reservation.domain.usecase.user.common.InvalidPermissionsException;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
-import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
+import org.com.reservation.domain.usecase.common.exception.InvalidPermissionsException;
+import org.com.reservation.domain.usecase.common.exception.UserNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.UserDisabledException;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -15,6 +15,10 @@ public interface RoomSessionRepository extends JpaRepository<RoomSessionEntity, 
     @Query(value = "DELETE FROM tb_rooms_sessions rs WHERE rs.rs_session_id = :sessionId", nativeQuery = true)
     void deleteAllBySessionId(@Param("sessionId") Long sessionId);
 
-    @Query("SELECT rs FROM RoomSessionEntity rs WHERE rs.room.id = :roomId AND rs.session.id = :sessionId")
+    @Query("SELECT rs FROM RoomSessionEntity rs " +
+        "JOIN FETCH rs.session ss " +
+        "JOIN FETCH rs.room rm " +
+        "WHERE rm.id = :roomId " +
+        "AND ss.id = :sessionId")
     Optional<RoomSessionEntity> findBySessionAndRoom(@Param("sessionId") Long sessionId, @Param("roomId") Long roomId);
 }

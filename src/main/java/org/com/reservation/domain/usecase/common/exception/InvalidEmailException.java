@@ -1,4 +1,4 @@
-package org.com.reservation.domain.usecase.user.common.exception;
+package org.com.reservation.domain.usecase.common.exception;
 
 public class InvalidEmailException extends RuntimeException {
     private final static String MESSAGE = "Invalid e-mail address!";

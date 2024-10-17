@@ -20,4 +20,10 @@ public class RoomsSeatsDataProviderImpl implements RoomsSeatsDataProvider {
         List<RoomSeatEntity> roomSeatEntities = roomsSeatsRepository.findAllByRoomSorted(roomId);
         return roomSeatEntities.stream().map(RoomSeatMapper::toRoomSeat).toList();
     }
+
+    @Override
+    public List<RoomSeat> findManyByIdAndRoom(Long roomId, List<Long> roomSeatsIds) {
+        List<RoomSeatEntity> roomSeatEntities = roomsSeatsRepository.findManyByIdAndRoomId(roomId, roomSeatsIds);
+        return roomSeatEntities.stream().map(RoomSeatMapper::toRoomSeat).toList();
+    }
 }

@@ -1,19 +1,17 @@
 package org.com.reservation.application.config;
 
-import org.com.reservation.domain.usecase.common.exception.InvalidDateException;
-import org.com.reservation.domain.usecase.common.exception.MovieNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.*;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.GenresNotFoundException;
 import org.com.reservation.domain.usecase.movie.registerMovie.exception.MovieTitleAlreadyExistsException;
+import org.com.reservation.domain.usecase.reservation.makeReservation.exception.RoomSeatNotFoundException;
+import org.com.reservation.domain.usecase.reservation.makeReservation.exception.SeatAlreadyReservedException;
+import org.com.reservation.domain.usecase.reservation.makeReservation.exception.SessionAlreadyStartedException;
 import org.com.reservation.domain.usecase.session.createSession.exception.RoomsNotFoundException;
 import org.com.reservation.domain.usecase.session.createSession.exception.SessionPeriodUnavailableException;
-import org.com.reservation.domain.usecase.user.common.InvalidPermissionsException;
-import org.com.reservation.domain.usecase.user.common.exception.InvalidEmailException;
-import org.com.reservation.domain.usecase.user.common.exception.UserNotFoundException;
 import org.com.reservation.domain.usecase.user.registerUser.exception.EmailAlreadyUsedException;
 import org.com.reservation.domain.usecase.user.registerUser.exception.InvalidPasswordException;
 import org.com.reservation.domain.usecase.user.userAuthentication.exception.ErrorSigningAuthenticationException;
 import org.com.reservation.domain.usecase.user.userAuthentication.exception.InvalidCredentialsException;
-import org.com.reservation.domain.usecase.user.userAuthentication.exception.UserDisabledException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -101,6 +99,36 @@ public class RestControllerExceptionConfig {
         return new ResponseEntity<>(mapErrors(ex, HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(InvalidPropertyException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidPropertyException(InvalidPropertyException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SeatAlreadyReservedException.class)
+    public ResponseEntity<Map<String, String>> handleSeatAlreadyReservedException(SeatAlreadyReservedException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(SessionNotActiveException.class)
+    public ResponseEntity<Map<String, String>> handleSessionNotActiveException(SessionNotActiveException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SessionAlreadyStartedException.class)
+    public ResponseEntity<Map<String, String>> handleSessionAlreadyStartedException(SessionAlreadyStartedException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RoomSeatNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleRoomSeatNotFoundException(RoomSeatNotFoundException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SessionNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleSessionNotFoundException(SessionNotFoundException ex) {
+        return new ResponseEntity<>(mapErrors(ex, HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    }
+    
     private Map<String, String> mapErrors(Exception ex, int statusValue) {
         return new LinkedHashMap<>() {{
             put("date", new Date().toString());

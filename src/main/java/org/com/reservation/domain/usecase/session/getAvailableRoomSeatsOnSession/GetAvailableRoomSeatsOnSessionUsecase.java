@@ -8,7 +8,7 @@ import org.com.reservation.domain.interfaces.dataprovider.*;
 import org.com.reservation.domain.usecase.common.exception.RoomNotFoundException;
 import org.com.reservation.domain.usecase.common.exception.SessionNotActiveException;
 import org.com.reservation.domain.usecase.common.exception.SessionNotFoundException;
-import org.com.reservation.domain.usecase.session.getAvailableRoomSeatsOnSession.exception.RoomSessionNotFoundException;
+import org.com.reservation.domain.usecase.common.exception.RoomSessionNotFoundException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

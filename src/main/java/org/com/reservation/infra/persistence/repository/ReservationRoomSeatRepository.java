@@ -24,4 +24,12 @@ public interface ReservationRoomSeatRepository extends JpaRepository<Reservation
         "WHERE rrs.reservation.id = :reservationId " +
         "AND rm.id = :roomId")
     List<ReservationRoomSeatEntity> findByReservationAndRoom(@Param("reservationId") Long reservationId, @Param("roomId") Long roomId);
+
+    @Query("SELECT rrs FROM ReservationRoomSeatEntity rrs " +
+        "JOIN FETCH rrs.roomSeat rs " +
+        "JOIN FETCH rrs.reservation rst " +
+        "JOIN FETCH rst.session ss " +
+        "WHERE ss.id = :sessionId AND ss.active = true " +
+        "AND rs.room.id = :roomId AND rs.seat.id IN (:seatsIds)")
+    List<ReservationRoomSeatEntity> findManyBySessionIdRoomIdSeatsIds(@Param("sessionId") Long sessionId, @Param("roomId") Long roomId, @Param("seatsIds") List<Long> seatsIds);
 }

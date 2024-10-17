@@ -54,7 +54,7 @@ public class MovieEntity {
     @Column(name = "MO_UPDATED_AT", nullable = false)
     private Date updatedAt;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "movie")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "movie")
     private MovieTicketEntity movieTicket;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
