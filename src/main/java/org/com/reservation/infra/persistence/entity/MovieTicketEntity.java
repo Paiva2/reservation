@@ -48,5 +48,5 @@ public class MovieTicketEntity {
     private MovieEntity movie;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movieTicket")
-    private List<ReservationMovieTicketEntity> reservationMovieTickets;
+    private List<ReservationTicketEntity> reservationTickets;
 }

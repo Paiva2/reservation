@@ -10,8 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
-public class ReservationMovieTicket {
-    private KeyId id;
+public class ReservationTicket {
+    private Long id;
     private BigDecimal pricePaid;
     private EnumTicketType type;
     private Date createdAt;
@@ -19,13 +19,4 @@ public class ReservationMovieTicket {
 
     private Reservation reservation;
     private MovieTicket movieTicket;
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    @Builder
-    public static class KeyId {
-        private Long reservationId;
-        private Long movieTicketId;
-    }
 }

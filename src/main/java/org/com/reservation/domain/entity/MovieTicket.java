@@ -23,5 +23,5 @@ public class MovieTicket {
     private Date updatedAt;
 
     private Movie movie;
-    private List<ReservationMovieTicket> reservationMovieTickets;
+    private List<ReservationTicket> reservationTickets;
 }

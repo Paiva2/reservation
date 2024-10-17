@@ -19,6 +19,6 @@ public class Reservation {
 
     private User user;
     private Session session;
-    private List<ReservationMovieTicket> reservationMovieTickets;
+    private List<ReservationTicket> reservationTickets;
     private List<ReservationRoomSeat> reservationRoomSeats;
 }

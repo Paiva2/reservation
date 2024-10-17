@@ -38,7 +38,7 @@ public class ReservationEntity {
     private SessionEntity session;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
-    private List<ReservationMovieTicketEntity> reservationMovieTickets;
+    private List<ReservationTicketEntity> reservationTickets;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
     private List<ReservationRoomSeatEntity> reservationRoomSeats;

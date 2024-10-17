@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS tb_reservations_movies_tickets CASCADE;

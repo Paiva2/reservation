@@ -27,9 +27,9 @@ public class ReservationMapper {
             copyProperties(reservationEntity.getSession(), reservation.getSession());
         }
 
-        if (reservationEntity.getReservationMovieTickets() != null) {
-            reservation.setReservationMovieTickets(new ArrayList<>());
-            copyProperties(reservationEntity.getReservationMovieTickets(), reservation.getReservationMovieTickets());
+        if (reservationEntity.getReservationTickets() != null) {
+            reservation.setReservationTickets(new ArrayList<>());
+            copyProperties(reservationEntity.getReservationTickets(), reservation.getReservationTickets());
         }
 
         if (reservationEntity.getReservationRoomSeats() != null) {
@@ -56,9 +56,9 @@ public class ReservationMapper {
             copyProperties(reservation.getSession(), reservationEntity.getSession());
         }
 
-        if (reservation.getReservationMovieTickets() != null) {
-            reservationEntity.setReservationMovieTickets(new ArrayList<>());
-            copyProperties(reservation.getReservationMovieTickets(), reservationEntity.getReservationMovieTickets());
+        if (reservation.getReservationTickets() != null) {
+            reservationEntity.setReservationTickets(new ArrayList<>());
+            copyProperties(reservation.getReservationTickets(), reservationEntity.getReservationTickets());
         }
 
         if (reservation.getReservationRoomSeats() != null) {

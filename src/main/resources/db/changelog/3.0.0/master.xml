@@ -5,23 +5,16 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
 >
     <include
+            labels="8-delete-old-tb-reservation-movie-tickets"
             author="paiva2"
-            labels="1.0.0"
-            created="2024-10-05"
-            file="classpath:db/changelog/1.0.0/master.xml"
-    />
-
-    <include
-            author="paiva2"
-            labels="2.0.0"
-            created="2024-10-08"
-            file="classpath:db/changelog/2.0.0/master.xml"
-    />
-
-    <include
-            author="paiva2"
-            labels="3.0.0"
             created="2024-10-17"
-            file="classpath:db/changelog/3.0.0/master.xml"
+            file="classpath:db/changelog/3.0.0/8-delete-old-tb-reservation-movie-tickets.sql"
+    />
+
+    <include
+            labels="9-create-new-table-reservation-tickets"
+            author="paiva2"
+            created="2024-10-17"
+            file="classpath:db/changelog/3.0.0/9-create-new-table-reservation-tickets.sql"
     />
 </databaseChangeLog>
