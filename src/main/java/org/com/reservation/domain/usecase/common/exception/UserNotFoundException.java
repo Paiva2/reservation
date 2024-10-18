@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.common.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import org.com.reservation.domain.common.exception.NotFoundException;
+
+public class UserNotFoundException extends NotFoundException {
     private static final String MESSAGE = "User not found!";
 
     public UserNotFoundException() {

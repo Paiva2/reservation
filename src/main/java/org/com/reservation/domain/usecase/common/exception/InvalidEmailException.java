@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.common.exception;
 
-public class InvalidEmailException extends RuntimeException {
+import org.com.reservation.domain.common.exception.BadRequestException;
+
+public class InvalidEmailException extends BadRequestException {
     private final static String MESSAGE = "Invalid e-mail address!";
 
     public InvalidEmailException() {

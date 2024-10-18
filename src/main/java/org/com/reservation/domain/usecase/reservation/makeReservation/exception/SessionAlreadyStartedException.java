@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.reservation.makeReservation.exception;
 
-public class SessionAlreadyStartedException extends RuntimeException {
+import org.com.reservation.domain.common.exception.BadRequestException;
+
+public class SessionAlreadyStartedException extends BadRequestException {
     private final static String MESSAGE = "Session already started!";
 
     public SessionAlreadyStartedException() {

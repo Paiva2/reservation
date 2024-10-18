@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.user.userAuthentication.exception;
 
-public class InvalidCredentialsException extends RuntimeException {
+import org.com.reservation.domain.common.exception.ForbiddenException;
+
+public class InvalidCredentialsException extends ForbiddenException {
     private final static String MESSAGE = "Invalid credentials.";
 
     public InvalidCredentialsException() {

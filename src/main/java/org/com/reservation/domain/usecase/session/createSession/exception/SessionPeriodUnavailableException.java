@@ -1,8 +1,10 @@
 package org.com.reservation.domain.usecase.session.createSession.exception;
 
+import org.com.reservation.domain.common.exception.ConflictException;
+
 import java.text.MessageFormat;
 
-public class SessionPeriodUnavailableException extends RuntimeException {
+public class SessionPeriodUnavailableException extends ConflictException {
     public static final String MESSAGE = "Rooms {0} already being used by other Session on this period! Sessions: {1}";
     public static final String MESSAGE_MANY = "There are rooms being used on this period by other session: {0}";
 

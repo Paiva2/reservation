@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.common.exception;
 
-public class UserDisabledException extends RuntimeException {
+import org.com.reservation.domain.common.exception.ForbiddenException;
+
+public class UserDisabledException extends ForbiddenException {
     private static final String MESSAGE = "User disabled!";
 
     public UserDisabledException() {

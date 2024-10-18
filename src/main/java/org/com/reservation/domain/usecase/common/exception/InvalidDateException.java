@@ -1,6 +1,8 @@
 package org.com.reservation.domain.usecase.common.exception;
 
-public class InvalidDateException extends RuntimeException {
+import org.com.reservation.domain.common.exception.BadRequestException;
+
+public class InvalidDateException extends BadRequestException {
     public InvalidDateException(String message) {
         super(message);
     }
