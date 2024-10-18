@@ -1,5 +1,7 @@
 package org.com.reservation.infra.persistence.mapper;
 
+import org.com.reservation.domain.entity.MovieTicket;
+import org.com.reservation.domain.entity.Reservation;
 import org.com.reservation.domain.entity.ReservationTicket;
 import org.com.reservation.infra.persistence.entity.ReservationTicketEntity;
 import org.springframework.beans.BeanUtils;
@@ -29,11 +31,15 @@ public class ReservationTicketMapper {
         copyProperties(reservationTicketEntity, reservationTicket);
 
         if (reservationTicketEntity.getReservation() != null) {
-            reservationTicket.setReservation(ReservationMapper.toReservation(reservationTicketEntity.getReservation()));
+            Reservation reservation = new Reservation();
+            reservationTicket.setReservation(reservation);
+            copyProperties(reservationTicketEntity.getReservation(), reservationTicket.getReservation());
         }
 
         if (reservationTicketEntity.getMovieTicket() != null) {
-            reservationTicket.setMovieTicket(MovieTicketMapper.toMovieTicket(reservationTicketEntity.getMovieTicket()));
+            MovieTicket movieTicket = new MovieTicket();
+            reservationTicket.setMovieTicket(movieTicket);
+            copyProperties(reservationTicketEntity.getMovieTicket(), reservationTicket.getMovieTicket());
         }
 
         return reservationTicket;

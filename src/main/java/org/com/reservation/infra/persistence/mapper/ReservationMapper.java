@@ -1,14 +1,11 @@
 package org.com.reservation.infra.persistence.mapper;
 
-import org.com.reservation.domain.entity.Reservation;
-import org.com.reservation.domain.entity.Session;
-import org.com.reservation.domain.entity.User;
-import org.com.reservation.infra.persistence.entity.ReservationEntity;
-import org.com.reservation.infra.persistence.entity.SessionEntity;
-import org.com.reservation.infra.persistence.entity.UserEntity;
+import org.com.reservation.domain.entity.*;
+import org.com.reservation.infra.persistence.entity.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReservationMapper {
     public static Reservation toReservation(ReservationEntity reservationEntity) {
@@ -25,16 +22,32 @@ public class ReservationMapper {
         if (reservationEntity.getSession() != null) {
             reservation.setSession(new Session());
             copyProperties(reservationEntity.getSession(), reservation.getSession());
+
+            if (reservationEntity.getSession().getMovie() != null) {
+                Movie movie = new Movie();
+                reservation.getSession().setMovie(movie);
+                copyProperties(reservationEntity.getSession().getMovie(), reservation.getSession().getMovie());
+            }
         }
 
         if (reservationEntity.getReservationTickets() != null) {
-            reservation.setReservationTickets(new ArrayList<>());
-            copyProperties(reservationEntity.getReservationTickets(), reservation.getReservationTickets());
+            List<ReservationTicket> reservationTickets = new ArrayList<>();
+
+            for (ReservationTicketEntity reservationTicketEntity : reservationEntity.getReservationTickets()) {
+                reservationTickets.add(ReservationTicketMapper.toReservationTicket(reservationTicketEntity));
+            }
+
+            reservation.setReservationTickets(reservationTickets);
         }
 
         if (reservationEntity.getReservationRoomSeats() != null) {
-            reservation.setReservationRoomSeats(new ArrayList<>());
-            copyProperties(reservationEntity.getReservationRoomSeats(), reservation.getReservationRoomSeats());
+            List<ReservationRoomSeat> reservationRoomSeats = new ArrayList<>();
+
+            for (ReservationRoomSeatEntity reservationRoomSeatEntity : reservationEntity.getReservationRoomSeats()) {
+                reservationRoomSeats.add(ReservationRoomSeatMapper.toReservationRoomSeat(reservationRoomSeatEntity));
+            }
+
+            reservation.setReservationRoomSeats(reservationRoomSeats);
         }
 
         return reservation;
