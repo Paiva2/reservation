@@ -10,11 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 
-    @Query("SELECT rm FROM RoomEntity rm " +
-        "JOIN rm.roomSeats rms " +
-        "JOIN FETCH rm.roomSessions rs " +
-        "JOIN FETCH rs.session ss " +
-        "WHERE ss.active = true " +
-        "AND ss.end < current_timestamp")
+    @Query("SELECT rm FROM RoomEntity rm JOIN FETCH rm.roomSeats rms ")
     Page<RoomEntity> findAllAvailable(Pageable pageable);
 }

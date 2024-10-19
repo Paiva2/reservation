@@ -2,10 +2,12 @@ package org.com.reservation.application.controller.reservation;
 
 import jakarta.validation.Valid;
 import org.com.reservation.application.controller.dto.input.reservation.MakeReservationInput;
+import org.com.reservation.application.controller.dto.output.reservation.GetAllReservationsFromSessionOutput;
 import org.com.reservation.application.controller.dto.output.reservation.ListUserReservationsOutput;
 import org.com.reservation.application.controller.dto.output.reservation.MakeReservationOutput;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,4 +23,8 @@ public interface ReservationController {
 
     @DeleteMapping("/{reservationId}/cancel")
     ResponseEntity<Void> cancel(Authentication authentication, @PathVariable("reservationId") Long reservationId);
+
+    @GetMapping("/information/session/{sessionId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<GetAllReservationsFromSessionOutput> getInformation(Authentication authentication, @PathVariable("sessionId") Long sessionId, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "5") Integer size);
 }

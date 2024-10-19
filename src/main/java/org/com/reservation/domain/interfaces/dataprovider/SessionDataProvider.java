@@ -23,5 +23,7 @@ public interface SessionDataProvider {
 
     Optional<Session> findByReservationId(Long reservationId);
 
+    Optional<Session> findById(Long id);
+
     void makeFinishedSessionsInactive();
 }

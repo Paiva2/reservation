@@ -39,7 +39,7 @@ of the system. However here are some requirements that you can consider:
 - [x] Users should be able to cancel their reservations (only upcoming ones).
 - [x] Admins should be able to validate reservation tickets.
 - Admins should be able to cancel reservation tickets (only upcoming ones).
-- Admins should be able to see all reservations, capacity, and revenue.
+- [x] Admins should be able to see all reservations, capacity, and revenue.
 
 ## Implementation Considerations
 

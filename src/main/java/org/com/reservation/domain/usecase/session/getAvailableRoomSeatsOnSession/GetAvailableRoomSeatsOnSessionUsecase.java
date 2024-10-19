@@ -73,7 +73,7 @@ public class GetAvailableRoomSeatsOnSessionUsecase {
     }
 
     private List<Reservation> findSessionReservations(Long sessionId) {
-        return reservationDataProvider.findAllBySession(sessionId);
+        return reservationDataProvider.findAllActiveBySessionId(sessionId);
     }
 
     private List<ReservationRoomSeat> findReservationSeats(Long reservationId, Long roomId) {

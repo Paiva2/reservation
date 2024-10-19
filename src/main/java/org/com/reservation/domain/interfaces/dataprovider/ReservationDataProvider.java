@@ -11,7 +11,9 @@ import java.util.Optional;
 public interface ReservationDataProvider {
     List<Reservation> deleteAllBySessionId(Long sessionId);
 
-    List<Reservation> findAllBySession(Long sessionId);
+    List<Reservation> findAllActiveBySessionId(Long sessionId);
+
+    Page<Reservation> findAllBySessionPageable(Long sessionId, Pageable pageable);
 
     Reservation persist(Reservation reservation);
 

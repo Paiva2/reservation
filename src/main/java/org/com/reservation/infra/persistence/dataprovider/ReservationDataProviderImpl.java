@@ -26,9 +26,15 @@ public class ReservationDataProviderImpl implements ReservationDataProvider {
     }
 
     @Override
-    public List<Reservation> findAllBySession(Long sessionId) {
-        List<ReservationEntity> reservationEntities = reservationRespository.findAllBySessionId(sessionId);
+    public List<Reservation> findAllActiveBySessionId(Long sessionId) {
+        List<ReservationEntity> reservationEntities = reservationRespository.findAllActiveBySessionId(sessionId);
         return reservationEntities.stream().map(ReservationMapper::toReservation).toList();
+    }
+
+    @Override
+    public Page<Reservation> findAllBySessionPageable(Long sessionId, Pageable pageable) {
+        Page<ReservationEntity> reservationEntities = reservationRespository.findAllBySessionId(sessionId, pageable);
+        return reservationEntities.map(ReservationMapper::toReservation);
     }
 
     @Override

@@ -17,7 +17,14 @@ public interface ReservationRespository extends JpaRepository<ReservationEntity,
     List<ReservationEntity> deleteAllBySessionId(Long sessionId);
 
     @Query("SELECT rs FROM ReservationEntity rs JOIN FETCH rs.session ss WHERE ss.id = :sessionId AND ss.active = true")
-    List<ReservationEntity> findAllBySessionId(Long sessionId);
+    List<ReservationEntity> findAllActiveBySessionId(Long sessionId);
+
+    @Query("SELECT rs FROM ReservationEntity rs " +
+        "JOIN FETCH rs.session ss " +
+        "JOIN rs.reservationRoomSeats rrs " +
+        "JOIN rs.reservationTickets rt " +
+        "WHERE ss.id = :sessionId ")
+    Page<ReservationEntity> findAllBySessionId(Long sessionId, Pageable pageable);
 
     @Query(value = "SELECT * FROM tb_reservations rsv " +
         "JOIN tb_sessions ss ON ss.ss_id = rsv.res_session_id " +

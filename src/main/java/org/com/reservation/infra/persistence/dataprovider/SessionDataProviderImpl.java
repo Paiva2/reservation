@@ -63,6 +63,13 @@ public class SessionDataProviderImpl implements SessionDataProvider {
     }
 
     @Override
+    public Optional<Session> findById(Long id) {
+        Optional<SessionEntity> sessionEntity = sessionRepository.findById(id);
+        if (sessionEntity.isEmpty()) return Optional.empty();
+        return Optional.of(SessionMapper.toSession(sessionEntity.get()));
+    }
+
+    @Override
     public void makeFinishedSessionsInactive() {
         sessionRepository.inactiveFinishedSessions();
     }
