@@ -61,4 +61,9 @@ public class SessionDataProviderImpl implements SessionDataProvider {
         if (sessionEntity.isEmpty()) return Optional.empty();
         return Optional.of(SessionMapper.toSession(sessionEntity.get()));
     }
+
+    @Override
+    public void makeFinishedSessionsInactive() {
+        sessionRepository.inactiveFinishedSessions();
+    }
 }

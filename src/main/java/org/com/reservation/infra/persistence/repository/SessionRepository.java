@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -42,4 +43,9 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
 
     @Query("SELECT ss FROM SessionEntity ss JOIN ss.reservations rs WHERE rs.id = :reservationId")
     Optional<SessionEntity> findByReservationId(@Param("reservationId") Long reservationId);
+
+    @Modifying
+    @Query(value = "UPDATE tb_sessions SET ss_active = false WHERE date_trunc('day', ss_end) < date_trunc('day', now())", nativeQuery = true)
+    @Transactional
+    void inactiveFinishedSessions();
 }

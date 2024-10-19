@@ -48,3 +48,7 @@ of the system. However here are some requirements that you can consider:
 - Think about how you will handle the scheduling of showtimes.
 - Think about how you will handle the reporting of reservations.
 - Think about how you will handle the authentication and authorization of users.
+
+//TODO
+
+- TESTAR MELHOR O MAKERESERVATIONUSECASE
