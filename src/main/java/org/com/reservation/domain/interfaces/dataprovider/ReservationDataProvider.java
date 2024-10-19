@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationDataProvider {
     List<Reservation> deleteAllBySessionId(Long sessionId);
@@ -15,4 +16,8 @@ public interface ReservationDataProvider {
     Reservation persist(Reservation reservation);
 
     Page<Reservation> findAllByUserFetchingAdditionals(Pageable pageable, Long userId, Date sessionStart);
+
+    Optional<Reservation> findById(Long reservationId);
+
+    void deleteById(Long reservationId);
 }

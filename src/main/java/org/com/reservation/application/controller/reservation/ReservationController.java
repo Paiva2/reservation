@@ -18,4 +18,7 @@ public interface ReservationController {
 
     @GetMapping("/list/mine")
     ResponseEntity<ListUserReservationsOutput> listMine(Authentication authentication, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "5") Integer size, @RequestParam(value = "sessionStart", required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date sessionStart);
+
+    @DeleteMapping("/{reservationId}/cancel")
+    ResponseEntity<Void> cancel(Authentication authentication, @PathVariable("reservationId") Long reservationId);
 }

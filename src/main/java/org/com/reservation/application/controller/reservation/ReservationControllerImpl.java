@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.com.reservation.application.controller.dto.input.reservation.MakeReservationInput;
 import org.com.reservation.application.controller.dto.output.reservation.ListUserReservationsOutput;
 import org.com.reservation.application.controller.dto.output.reservation.MakeReservationOutput;
+import org.com.reservation.domain.usecase.reservation.cancelUpcomingReservation.CancelUpcomingReservationUsecase;
 import org.com.reservation.domain.usecase.reservation.listUserReservations.ListUserReservationsUsecase;
 import org.com.reservation.domain.usecase.reservation.makeReservation.MakeReservationUsecase;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.Date;
 public class ReservationControllerImpl implements ReservationController {
     private final MakeReservationUsecase makeReservationUsecase;
     private final ListUserReservationsUsecase listUserReservationsUsecase;
+    private final CancelUpcomingReservationUsecase cancelUpcomingReservationUsecase;
 
     @Override
     @Transactional
@@ -33,5 +35,13 @@ public class ReservationControllerImpl implements ReservationController {
         Long subject = Long.parseLong(authentication.getName());
         ListUserReservationsOutput output = listUserReservationsUsecase.execute(subject, page, size, sessionStart);
         return new ResponseEntity<>(output, HttpStatus.OK);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<Void> cancel(Authentication authentication, Long reservationId) {
+        Long subject = Long.parseLong(authentication.getName());
+        cancelUpcomingReservationUsecase.execute(subject, reservationId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

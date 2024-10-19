@@ -4,7 +4,9 @@ import org.com.reservation.infra.persistence.entity.ReservationEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -23,4 +25,8 @@ public interface ReservationRespository extends JpaRepository<ReservationEntity,
         "WHERE rsv.res_user_id = :userId " +
         "AND (cast(:sessionStart as DATE) IS NULL OR date_trunc('day', ss.ss_start) = date_trunc('day', cast(:sessionStart as DATE)))", nativeQuery = true)
     Page<ReservationEntity> findAllByUserIdFetchAdditionals(Pageable pageable, Long userId, Date sessionStart);
+
+    @Modifying
+    @Query("DELETE FROM ReservationEntity WHERE id = :reservationId")
+    void deleteById(@Param("reservationId") Long reservationId);
 }
