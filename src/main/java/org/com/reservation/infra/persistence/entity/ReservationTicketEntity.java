@@ -38,7 +38,7 @@ public class ReservationTicketEntity {
     @Column(name = "RT_UPDATED_AT", nullable = false)
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RT_RESERVATION_ID")
     private ReservationEntity reservation;
 

@@ -39,4 +39,7 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
 
     @Query("SELECT ss FROM SessionEntity ss JOIN FETCH ss.movie mo WHERE ss.id = :id AND ss.active = TRUE")
     Optional<SessionEntity> findActiveById(@Param("id") Long id);
+
+    @Query("SELECT ss FROM SessionEntity ss JOIN ss.reservations rs WHERE rs.id = :reservationId")
+    Optional<SessionEntity> findByReservationId(@Param("reservationId") Long reservationId);
 }

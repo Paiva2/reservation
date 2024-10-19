@@ -54,4 +54,11 @@ public class SessionDataProviderImpl implements SessionDataProvider {
         if (sessionEntity.isEmpty()) return Optional.empty();
         return Optional.of(SessionMapper.toSession(sessionEntity.get()));
     }
+
+    @Override
+    public Optional<Session> findByReservationId(Long reservationId) {
+        Optional<SessionEntity> sessionEntity = sessionRepository.findByReservationId(reservationId);
+        if (sessionEntity.isEmpty()) return Optional.empty();
+        return Optional.of(SessionMapper.toSession(sessionEntity.get()));
+    }
 }

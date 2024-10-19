@@ -20,4 +20,6 @@ public interface SessionDataProvider {
     List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds);
 
     Optional<Session> findActiveById(Long id);
+
+    Optional<Session> findByReservationId(Long reservationId);
 }

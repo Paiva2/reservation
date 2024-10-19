@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservationMovieTicketRepository extends JpaRepository<ReservationTicketEntity, Long> {
+public interface ReservationTicketRepository extends JpaRepository<ReservationTicketEntity, Long> {
     @Modifying
     @Query("DELETE FROM ReservationTicketEntity rt " +
         "WHERE rt.reservation.id = :reservationId " +
