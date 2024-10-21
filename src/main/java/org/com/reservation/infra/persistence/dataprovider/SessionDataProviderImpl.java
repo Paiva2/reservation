@@ -49,6 +49,12 @@ public class SessionDataProviderImpl implements SessionDataProvider {
     }
 
     @Override
+    public Page<Session> findAllSessions(Pageable pageable, Date date, Boolean active) {
+        Page<SessionEntity> sessionEntities = sessionRepository.findAllSessions(pageable, date, active);
+        return sessionEntities.map(SessionMapper::toSession);
+    }
+
+    @Override
     public Optional<Session> findActiveById(Long id) {
         Optional<SessionEntity> sessionEntity = sessionRepository.findActiveById(id);
         if (sessionEntity.isEmpty()) return Optional.empty();

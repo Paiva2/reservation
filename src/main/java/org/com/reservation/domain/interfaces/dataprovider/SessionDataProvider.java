@@ -19,6 +19,8 @@ public interface SessionDataProvider {
 
     List<Session> findActiveSessionsByPeriodAndRooms(Date start, List<Long> roomIds);
 
+    Page<Session> findAllSessions(Pageable pageable, Date date, Boolean active);
+
     Optional<Session> findActiveById(Long id);
 
     Optional<Session> findByReservationId(Long reservationId);

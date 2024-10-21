@@ -48,4 +48,9 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
     @Query(value = "UPDATE tb_sessions SET ss_active = false WHERE date_trunc('day', ss_end) < date_trunc('day', now())", nativeQuery = true)
     @Transactional
     void inactiveFinishedSessions();
+
+    @Query(value = "SELECT * FROM tb_sessions ss " +
+        "WHERE (cast(:date as date) IS NULL OR date_trunc('day', ss.ss_start) = date_trunc('day', cast(:date as date))) " +
+        "AND (:active IS NULL OR ss.ss_active = cast(:active as boolean))", nativeQuery = true)
+    Page<SessionEntity> findAllSessions(Pageable pageable, @Param("date") Date date, @Param("active") Boolean active);
 }
