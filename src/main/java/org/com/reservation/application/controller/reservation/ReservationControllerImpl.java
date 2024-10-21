@@ -6,6 +6,7 @@ import org.com.reservation.application.controller.dto.output.reservation.GetAllR
 import org.com.reservation.application.controller.dto.output.reservation.ListUserReservationsOutput;
 import org.com.reservation.application.controller.dto.output.reservation.MakeReservationOutput;
 import org.com.reservation.domain.usecase.reservation.cancelUpcomingReservation.CancelUpcomingReservationUsecase;
+import org.com.reservation.domain.usecase.reservation.cancelUpcomingReservationAdmin.CancelUpcomingReservationAdminUsecase;
 import org.com.reservation.domain.usecase.reservation.getAllReservationsFromSession.GetAllReservationsFromSessionUsecase;
 import org.com.reservation.domain.usecase.reservation.listUserReservations.ListUserReservationsUsecase;
 import org.com.reservation.domain.usecase.reservation.makeReservation.MakeReservationUsecase;
@@ -24,6 +25,7 @@ public class ReservationControllerImpl implements ReservationController {
     private final ListUserReservationsUsecase listUserReservationsUsecase;
     private final CancelUpcomingReservationUsecase cancelUpcomingReservationUsecase;
     private final GetAllReservationsFromSessionUsecase getAllReservationsFromSessionUsecase;
+    private final CancelUpcomingReservationAdminUsecase cancelUpcomingReservationAdminUsecase;
 
     @Override
     @Transactional
@@ -53,5 +55,13 @@ public class ReservationControllerImpl implements ReservationController {
         Long subject = Long.parseLong(authentication.getName());
         GetAllReservationsFromSessionOutput output = getAllReservationsFromSessionUsecase.execute(subject, sessionId, page, size);
         return new ResponseEntity<>(output, HttpStatus.OK);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<Void> cancelReservationAdmin(Authentication authentication, Long reservationId, Long userId) {
+        Long subject = Long.parseLong(authentication.getName());
+        cancelUpcomingReservationAdminUsecase.execute(subject, userId, reservationId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

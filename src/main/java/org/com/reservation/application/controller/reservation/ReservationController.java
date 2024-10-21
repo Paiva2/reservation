@@ -27,4 +27,8 @@ public interface ReservationController {
     @GetMapping("/information/session/{sessionId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<GetAllReservationsFromSessionOutput> getInformation(Authentication authentication, @PathVariable("sessionId") Long sessionId, @RequestParam(value = "page", required = false, defaultValue = "1") Integer page, @RequestParam(value = "size", required = false, defaultValue = "5") Integer size);
+
+    @DeleteMapping("{reservationId}/user/{userId}/cancel")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ResponseEntity<Void> cancelReservationAdmin(Authentication authentication, @PathVariable("reservationId") Long reservationId, @PathVariable("userId") Long userId);
 }

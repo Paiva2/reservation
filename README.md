@@ -38,7 +38,7 @@ of the system. However here are some requirements that you can consider:
 - [x] Users should be able to see their reservations.
 - [x] Users should be able to cancel their reservations (only upcoming ones).
 - [x] Admins should be able to validate reservation tickets.
-- Admins should be able to cancel reservation tickets (only upcoming ones).
+- [x] Admins should be able to cancel reservation tickets (only upcoming ones).
 - [x] Admins should be able to see all reservations, capacity, and revenue.
 
 ## Implementation Considerations
@@ -48,7 +48,3 @@ of the system. However here are some requirements that you can consider:
 - Think about how you will handle the scheduling of showtimes.
 - Think about how you will handle the reporting of reservations.
 - Think about how you will handle the authentication and authorization of users.
-
-//TODO
-
-- TESTAR MELHOR O MAKERESERVATIONUSECASE

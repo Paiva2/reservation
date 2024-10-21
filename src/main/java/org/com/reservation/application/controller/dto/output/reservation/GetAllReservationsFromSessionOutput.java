@@ -25,7 +25,7 @@ public class GetAllReservationsFromSessionOutput {
     private Boolean isLast;
     private Long totalElements;
     private SessionOutput session;
-    private List<ReservationOutput> items;
+    private List<ReservationOutput> reservations;
 
     private static final DateUtils dateUtils = new DateUtilsImpl();
 
@@ -59,8 +59,19 @@ public class GetAllReservationsFromSessionOutput {
     private static class ReservationOutput {
         private Long id;
         private String createdAt;
+        private UserOutput user;
         private List<ReservationTicketOutput> reservationTickets;
         private List<ReservationRoomSeatOutput> roomSeats;
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    @Builder
+    private static class UserOutput {
+        private Long id;
+        private String name;
+        private String email;
     }
 
     @AllArgsConstructor
@@ -107,18 +118,24 @@ public class GetAllReservationsFromSessionOutput {
                     .durationSeconds(movie.getDurationSeconds())
                     .build()
                 ).build()
-            ).items(sessionReservations.stream().map(GetAllReservationsFromSessionOutput::toReservationOutput).toList())
+            ).reservations(sessionReservations.stream().map(GetAllReservationsFromSessionOutput::toReservationOutput).toList())
             .build();
     }
 
     private static ReservationOutput toReservationOutput(Reservation reservation) {
         List<ReservationTicket> reservationTickets = reservation.getReservationTickets();
         List<ReservationRoomSeat> reservationRoomSeats = reservation.getReservationRoomSeats();
+        User user = reservation.getUser();
 
         return ReservationOutput.builder()
             .id(reservation.getId())
             .createdAt(dateUtils.formatDateTime(reservation.getCreatedAt()))
-            .reservationTickets(reservationTickets.stream().map(GetAllReservationsFromSessionOutput::toReservationTicketOutput).toList())
+            .user(UserOutput.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getFirstName() + " " + user.getLastName())
+                .build()
+            ).reservationTickets(reservationTickets.stream().map(GetAllReservationsFromSessionOutput::toReservationTicketOutput).toList())
             .roomSeats(reservationRoomSeats.stream().map(GetAllReservationsFromSessionOutput::toReservationRoomSeatOutput).toList())
             .build();
     }
